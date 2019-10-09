@@ -1,18 +1,53 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.9.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'java'
+    id 'org.springframework.boot' version '2.1.9.RELEASE' apply false
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
+    id 'com.diffplug.gradle.spotless' version '3.10.0' apply false
 }
 
-group = 'com.gvart'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
 
-repositories {
-    mavenCentral()
+subprojects {
+    group = 'com.greenlight'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.diffplug.gradle.spotless'
+
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+
+    test {
+        useJUnitPlatform()
+    }
+
+    spotless {
+        enforceCheck = false
+        java {
+            googleJavaFormat()
+        }
+    }
+    jacocoTestReport {
+        reports {
+            xml.enabled = false
+            csv.enabled = false
+            html.destination file('${buildDir}/jacocoHtml')
+        }
+    }
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.5
+                }
+            }
+        }
+    }
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
