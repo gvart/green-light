@@ -1,0 +1,3 @@
+rootProject.name = 'greenlight'
+include 'config-server'
+
