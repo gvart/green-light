@@ -5,4 +5,33 @@ jobs:
       - image: circleci/openjdk:11.0.3-jdk-stretch
     steps:
       - checkout
-      - run: echo "hello world"
+      - restore_cache:
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - restore_cache:
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run:
+          name: Run tests
+          command: ./gradlew test jacocoMerge
+      - save_cache:
+          paths:
+            - ~/.gradle/wrapper
+          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - store_test_results:
+          path: build/jacoco/allTestCoverage.exec
+      - store_artifacts:
+          path: build/jacoco/allTestCoverage.exec
+      - run:
+          name: Assemble JARs
+          command: ./gradlew build -x test
+      - store_artifacts:
+          path: build/libs
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
