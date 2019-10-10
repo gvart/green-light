@@ -26,7 +26,7 @@ jobs:
           path: build/jacoco/allTestCoverage.exec
       - run:
           name: Assemble JARs
-          command: ./gradlew build -x test
+          command: ./gradlew build collectJars -x test
       - store_artifacts:
           path: build/libs
 
