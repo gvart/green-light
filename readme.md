@@ -1,5 +1,7 @@
 # Green Light
 
+##### Build status: [![CircleCI](https://circleci.com/gh/gvart/green-light.svg?style=svg)](https://circleci.com/gh/gvart/green-light)
+
 This is an open source project based on Spring Cloud which implies Micro Services 
 architecture. The main idea of that project is providing a good solution to organize 
 volunteers in public activity upon our environment.
