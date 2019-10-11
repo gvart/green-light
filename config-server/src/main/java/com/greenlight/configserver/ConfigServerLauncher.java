@@ -8,4 +8,7 @@ public class ConfigServerLauncher {
   public static void main(String[] args) {
     SpringApplication.run(ConfigServerLauncher.class, args);
   }
+  void a(){
+    if (true) System.out.println("");
+  }
 }
