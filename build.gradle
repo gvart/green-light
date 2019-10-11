@@ -17,10 +17,10 @@ apply plugin: 'jacoco'
 def allTestCoverageFile = "$rootDir/build/jacoco/allTestCoverage.exec"
 sonarqube {
     properties {
-        property "sonar.projectKey", "gvart_green-light"
+        property "sonar.projectKey", "green-light"
         property "sonar.organization", "gvart"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "f3236f21f06e485d5c0bc2cdc2a5379feec352cc"
+        property "sonar.login", "f87f73c98c2ab7f4dc3cebf0de0696042af4bff7"
         property "sonar.jacoco.reportPaths", allTestCoverageFile
     }
 }
