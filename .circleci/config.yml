@@ -10,8 +10,8 @@ jobs:
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests
-          command: ./gradlew test jacocoMerge
+          name: Run tests and sent to sonarqube
+          command: ./gradlew test jacocoMerge sonarqube
       - save_cache:
           paths:
             - ~/.gradle/wrapper
