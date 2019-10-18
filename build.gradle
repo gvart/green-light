@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.0' apply false
+    id 'org.springframework.boot' version '2.2.0.RELEASE' apply false
     id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
     id 'com.diffplug.gradle.spotless' version '3.10.0' apply false
     id 'io.freefair.lombok' version '4.1.2' apply false
