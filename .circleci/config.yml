@@ -16,7 +16,7 @@ jobs:
           name: Run tests and sent to codecov
           command: ./gradlew test jacocoMerge
       - codecov/upload:
-          file: build/jacoco/allTestCoverage.exec
+          file: build/jacoco/report.xml
       - save_cache:
           paths:
             - ~/.gradle/wrapper
