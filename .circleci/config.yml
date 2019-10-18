@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
+
 jobs:
   build:
     docker:
@@ -10,8 +13,10 @@ jobs:
       - restore_cache:
           key: v1-gradle-cache-{{ checksum "build.gradle" }}
       - run:
-          name: Run tests and sent to sonarqube
-          command: ./gradlew test jacocoMerge sonarqube
+          name: Run tests and sent to codecov
+          command: ./gradlew test jacocoMerge
+      - codecov/upload:
+          file: build/jacoco/allTestCoverage.exec
       - save_cache:
           paths:
             - ~/.gradle/wrapper
@@ -35,3 +40,6 @@ workflows:
   workflow:
     jobs:
       - build
+notify:
+  webhooks:
+    - url: https://webhooks.gitter.im/e/bc2a3e3314343a3948ea

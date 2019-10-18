@@ -1,7 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.0.RC1' apply false
+    id 'org.springframework.boot' version '2.2.0' apply false
     id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
-    id "org.sonarqube" version "2.8"
     id 'com.diffplug.gradle.spotless' version '3.10.0' apply false
     id 'io.freefair.lombok' version '4.1.2' apply false
 }
@@ -16,19 +15,7 @@ repositories {
 apply plugin: 'jacoco'
 
 def allTestCoverageFile = "$rootDir/build/jacoco/allTestCoverage.exec"
-sonarqube {
-    properties {
-        property "sonar.projectKey", "green-light"
-        property "sonar.organization", "gvart"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "f87f73c98c2ab7f4dc3cebf0de0696042af4bff7"
-        property "sonar.jacoco.reportPaths", allTestCoverageFile
-    }
-}
-
 subprojects {
-
-
     group = 'com.greenlight'
 
     repositories {
