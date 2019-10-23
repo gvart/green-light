@@ -2,7 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.2.0.RELEASE' apply false
     id 'io.spring.dependency-management' version '1.0.8.RELEASE' apply false
     id 'com.diffplug.gradle.spotless' version '3.10.0' apply false
-    id 'io.freefair.lombok' version '4.1.2' apply false
 }
 
 repositories {
@@ -26,10 +25,8 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'com.diffplug.gradle.spotless'
-    apply plugin: 'io.freefair.lombok'
 
-    sourceCompatibility = '11'
-    targetCompatibility = '11'
+    sourceCompatibility = JavaVersion.VERSION_11
 
     dependencies {
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -45,8 +42,8 @@ subprojects {
 
     spotless {
         enforceCheck = false
-        java {
-            googleJavaFormat()
+        kotlin {
+
         }
     }
 
@@ -81,7 +78,7 @@ task jacocoMergeTest(type: JacocoReport) {
     reports {
         xml.enabled = true
         xml.destination file("$project.buildDir/jacoco/report.xml")
-        html.enabled = false
+        html.enabled = true
     }
 }
 
