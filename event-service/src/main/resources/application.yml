@@ -1,9 +1,0 @@
-#Shared configuration
-server:
-  port: 8000
-
-spring:
-  profiles:
-    active: develop
-  application:
-    name: event-service

@@ -1,0 +1,9 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: event-service
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761

@@ -1,5 +1,0 @@
-rootProject.name = 'greenlight'
-
-include 'config-server'
-include 'registry-service'
-include 'event-service'
