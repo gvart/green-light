@@ -4,13 +4,22 @@ import com.greenlight.event.domain.Event
 import org.springframework.data.geo.Point
 
 import java.time.LocalDateTime
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
-data class EventCreateDTO(
+data class EventRequest(
+    @NotBlank
     val title: String,
     val description: String,
+    @Min(1)
     val statusId: Int,
+    @NotNull
     val geoLocation: Point,
+    @NotNull
     val startsAt: LocalDateTime,
+    @Min(1)
     val peopleRequired: Int
 ) : DomainConverter<Event> {
 

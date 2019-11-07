@@ -5,6 +5,7 @@ import com.greenlight.event.repository.EventStatusRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import javax.validation.Validation
 
 @Service
 class EventStatusService(private val eventStatusRepository: EventStatusRepository) : ReadOnlyService<EventStatus, Int> {
