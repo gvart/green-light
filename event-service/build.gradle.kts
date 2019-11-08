@@ -8,6 +8,7 @@ dependencies {
     implementation("org.springframework.data:spring-data-r2dbc:1.0.0.RC1")
     implementation("org.springframework.boot.experimental:spring-boot-starter-r2dbc:0.1.0.M2")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     //kotlin specific
     implementation(kotlin("stdlib-jdk8"))

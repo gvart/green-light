@@ -48,13 +48,14 @@ class EventStatusHandlerTests {
     }
 
     @Test
-    fun getAllStatuses() {
+    fun getAllStatusesTest() {
         webClient.get().uri("/api/v1/event-status").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus().isOk
-            .expectBodyList(EventStatus::class.java)
-            .hasSize(3)
-            .contains(*events)
-
+            .expectBody()
+            .jsonPath("$").isArray
+            .jsonPath("$[0].id").isNumber
+            .jsonPath("$[0].name").exists()
+            .jsonPath("$[0].allowActions").isBoolean
     }
 }

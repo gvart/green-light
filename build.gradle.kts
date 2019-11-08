@@ -1,8 +1,11 @@
+import com.google.cloud.tools.jib.api.Jib
+import com.google.cloud.tools.jib.gradle.JibExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
+    id("com.google.cloud.tools.jib") apply false
     kotlin("jvm") apply false
     kotlin("plugin.spring") apply false
     jacoco
@@ -28,6 +31,7 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "com.google.cloud.tools.jib")
 
     val testImplementation by configurations
 
@@ -63,6 +67,17 @@ subprojects {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
             jvmTarget = "1.8"
+        }
+    }
+
+    configure<JibExtension> {
+        from {
+            image = "azul/zulu-openjdk-alpine:11"
+
+        }
+        //todo finish
+        to {
+            image = "gvart/"
         }
     }
 }
