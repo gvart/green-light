@@ -8,7 +8,7 @@ data class Event(
     @Id
     val id: Long? = null,
 
-    var title: String? = null,
+    var title: String,
     var description: String,
     var status: EventStatus? = null,
     var geoLocation: Point,
@@ -17,5 +17,5 @@ data class Event(
     var updatedAt: LocalDateTime? = null,
     val finishedAt: LocalDateTime? = null,
     var authorId: Long? = null,
-    val peopleRequired: Int
+    var peopleRequired: Int
 )

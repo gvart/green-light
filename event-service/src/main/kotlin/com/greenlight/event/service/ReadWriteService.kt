@@ -1,7 +1,5 @@
 package com.greenlight.event.service
 
-import reactor.core.publisher.Mono
-
 /**
  * Base interface for services
  *
@@ -11,9 +9,9 @@ import reactor.core.publisher.Mono
  * @author gvart
  */
 interface ReadWriteService<T, D, I> : ReadOnlyService<T, I> {
-    fun save(entity: Mono<D>): Mono<T>
+    suspend fun save(request: D): T
 
-    fun update(id: I, entity: Mono<D>): Mono<T>
+    suspend fun update(id: I, request: D): T
 
-    fun delete(id: I): Mono<Void>
+    suspend fun delete(id: I): Void
 }

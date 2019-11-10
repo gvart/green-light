@@ -1,7 +1,6 @@
 package com.greenlight.event.service
 
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Base interface for services
@@ -11,8 +10,8 @@ import reactor.core.publisher.Mono
  * @author gvart
  */
 interface ReadOnlyService<T, I> {
-    fun findAll(): Flux<T>
+    fun findAll(): Flow<T>
 
-    fun findOne(id: I): Mono<T>
+    suspend fun findOne(id: I): T
 
 }
