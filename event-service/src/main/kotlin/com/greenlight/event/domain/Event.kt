@@ -1,7 +1,6 @@
 package com.greenlight.event.domain
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.geo.Point
 import java.time.LocalDateTime
 
 data class Event(

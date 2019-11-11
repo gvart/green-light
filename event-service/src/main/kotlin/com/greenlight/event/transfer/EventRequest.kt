@@ -1,12 +1,11 @@
 package com.greenlight.event.transfer
 
 import com.greenlight.event.domain.Event
-import org.springframework.data.geo.Point
+import com.greenlight.event.domain.Point
 
 import java.time.LocalDateTime
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
 
 data class EventRequest(

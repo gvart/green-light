@@ -34,6 +34,9 @@ class EventStatusHandlerTests {
     private lateinit var webClient: WebTestClient
 
     @MockBean
+    private lateinit var eventHandler: EventHandler
+
+    @MockBean
     private lateinit var eventStatusRepository: EventStatusRepository
 
     private val events = arrayOf(
