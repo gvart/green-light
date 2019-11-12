@@ -42,7 +42,7 @@ class EventService(
         val eventStatus = eventStatusService.findOne(request.statusId)
 
         //todo get userid from token
-        userServiceClient.findUserById(1)
+        //userServiceClient.findUserById(1)
         val event = request.convert().apply {
             authorId = 1
             status = eventStatus

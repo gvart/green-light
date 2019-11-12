@@ -2,6 +2,9 @@ spring:
   cloud:
     discovery:
       enabled: false
-
     config:
       enabled: false
+  jackson:
+    date-format: dd/MM/yyyy HH:mm:ss
+  webflux:
+    date-format: dd/MM/yyyy HH:mm:ss

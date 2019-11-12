@@ -75,9 +75,9 @@ subprojects {
             image = "azul/zulu-openjdk-alpine:11"
 
         }
-        //todo finish
         to {
-            image = "gvart/"
+            image = "gvart/greenlight-${project.name}"
+            tags = setOf(project.version.toString(), "latest")
         }
     }
 }

@@ -1,5 +1,9 @@
-version = "0.0.1-SNAPSHOT"
+import com.google.cloud.tools.jib.gradle.ContainerParameters
 
+version = "0.0.1-SNAPSHOT"
+val containerProperties = ContainerParameters().apply {
+    jvmFlags = listOf()
+}
 dependencies {
     val implementation by configurations
 

@@ -4,6 +4,10 @@ orbs:
 
 jobs:
   build:
+    branches:
+        only:
+          - master
+          - develop
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
     steps:
@@ -29,12 +33,11 @@ jobs:
           path: build/jacoco/allTestCoverage.exec
       - store_artifacts:
           path: build/jacoco/allTestCoverage.exec
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
-          name: Assemble JARs
-          command: ./gradlew build collectJars -x test
-      - store_artifacts:
-          path: build/libs
-
+          name: Build & push docker images
+          command: ./gradlew build jib -x test -Djib.to.auth.username=$DOCKER_USERNAME -Djib.to.auth.password=$DOCKER_PASSWORD
 workflows:
   version: 2
   workflow:

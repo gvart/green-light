@@ -60,7 +60,7 @@ databaseChangeLog:
                     references: event_status(id)
               - column:
                   name: geo_location
-                  type: varchar(256)
+                  type: jsonb
                   constraints:
                     nullable: false
               - column:

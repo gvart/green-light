@@ -5,14 +5,16 @@ import com.greenlight.event.config.RouterConfig
 import com.greenlight.event.domain.Event
 import com.greenlight.event.domain.EventStatus
 import com.greenlight.event.domain.Point
+import com.greenlight.event.extensions.printResponse
 import com.greenlight.event.repository.EventRepository
 import com.greenlight.event.service.EventService
 import com.greenlight.event.service.EventStatusService
 import com.greenlight.event.transfer.EventRequest
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.anyObject
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
@@ -38,19 +40,6 @@ class EventHandlerTests {
 
     private val statusId = 1
     private val eventStatus = EventStatus(statusId, "name", true)
-    private val event = Event(
-        1,
-        "title",
-        "description",
-        eventStatus,
-        Point(10.0, 10.0),
-        LocalDateTime.now(),
-        LocalDateTime.now(),
-        null,
-        null,
-        1,
-        10
-    )
 
     @Autowired
     private lateinit var webClient: WebTestClient
@@ -68,11 +57,13 @@ class EventHandlerTests {
     private lateinit var eventRepository: EventRepository
 
     @BeforeEach
-    suspend fun setup() {
-        Mockito.`when`(eventStatusService.findOne(statusId)).thenReturn(eventStatus)
-        Mockito.`when`(eventRepository.save(anyObject<Event>())).thenReturn(
-            Mono.just(event)
-        )
+    fun setup() {
+        runBlocking {
+            Mockito.`when`(eventStatusService.findOne(statusId)).thenReturn(eventStatus)
+            Mockito.`when`(eventRepository.save(any<Event>())).thenAnswer {
+                Mono.just(it.getArgument(0, Event::class.java))
+            }
+        }
     }
 
     @Test
@@ -81,7 +72,16 @@ class EventHandlerTests {
         webClient.post().uri("/api/v1/event").accept(MediaType.APPLICATION_JSON)
             .bodyValue(request)
             .exchange()
+            .printResponse()
             .expectStatus().isCreated
             .expectBody()
+//            .jsonPath("$.id").exists()
+            .jsonPath("$.title").isEqualTo(request.title)
+            .jsonPath("$.description").isEqualTo(request.description)
+//            .jsonPath("$.geoLocation").isEqualTo(request.geoLocation)
+            .jsonPath("$.startsAt").isEqualTo(request.startsAt)
+            .jsonPath("$.peopleRequired").isEqualTo(request.peopleRequired)
+
+
     }
 }
