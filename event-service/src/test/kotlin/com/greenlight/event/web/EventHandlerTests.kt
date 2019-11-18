@@ -32,7 +32,8 @@ import java.time.LocalDateTime
     classes = [
         RouterConfig::class,
         EventHandler::class,
-        EventService::class
+        EventService::class,
+
     ]
 )
 @ExtendWith(SpringExtension::class)

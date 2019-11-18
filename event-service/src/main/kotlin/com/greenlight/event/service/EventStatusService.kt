@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service
 @Service
 class EventStatusService(private val eventStatusRepository: EventStatusRepository) : ReadOnlyService<EventStatus, Int> {
 
+    fun insert() : EventStatus {
+
+    }
     override fun findAll(): Flow<EventStatus> {
         return eventStatusRepository.findAll().asFlow()
     }

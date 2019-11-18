@@ -1,16 +1,10 @@
 server:
   port: 8000
 
-spring:
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/event_service
-    username: postgres
-    password: postgres
-  datasource:
-    username: postgres
-    password: postgres
-    url: jdbc:postgresql://localhost:5432/event_service
-    type: org.postgresql.ds.PGSimpleDataSource
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/event_service
+#      username: mongo
+#      password: password
+#

@@ -1,6 +1,6 @@
 package com.greenlight.event.repository
 
 import com.greenlight.event.domain.EventStatus
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 
-interface EventStatusRepository : ReactiveCrudRepository<EventStatus, Int>
+interface EventStatusRepository : ReactiveMongoRepository<EventStatus, Int>

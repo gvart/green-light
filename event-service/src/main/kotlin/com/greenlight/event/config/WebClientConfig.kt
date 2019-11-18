@@ -20,14 +20,14 @@ class WebClientConfig {
     @LoadBalanced
     fun loadBalancedWebClient() = WebClient.builder()
 
-    @Bean
-    fun commandLineRunner(eventStatusRepository: EventStatusRepository, eventService: EventService):CommandLineRunner {
-
-        return CommandLineRunner {
-            var convert = EventRequest("title", "description", 1, Point(0.0, 1.1), LocalDateTime.now(), 10)
-            GlobalScope.launch {
-                eventService.save(convert)
-            }
-        }
-    }
+//    @Bean
+//    fun commandLineRunner(eventStatusRepository: EventStatusRepository, eventService: EventService):CommandLineRunner {
+//
+//        return CommandLineRunner {
+//            val convert = EventRequest("title", "description", 1, Point(0.0, 1.1), LocalDateTime.now(), 10)
+//            GlobalScope.launch {
+//                eventService.save(convert)
+//            }
+//        }
+//    }
 }

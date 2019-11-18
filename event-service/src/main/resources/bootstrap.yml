@@ -6,5 +6,12 @@ spring:
       fail-fast: true
       uri: http://localhost:8888
 
-  r2dbc:
-    data-username:
+
+  data:
+    mongodb:
+      username: mongo
+      password: password
+      database: event_service
+      port: 27017
+      host: localhost
+      authentication-database: admin
