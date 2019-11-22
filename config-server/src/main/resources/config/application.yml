@@ -1,9 +1,0 @@
-eureka:
-  client:
-    service-url:
-      default-zone: http://localhost:8761/eureka/
-spring:
-  jackson:
-    date-format: dd/MM/yyyy HH:mm:ss
-  webflux:
-    date-format: dd/MM/yyyy HH:mm:ss

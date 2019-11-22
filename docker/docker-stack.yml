@@ -8,7 +8,7 @@ volumes:
   gl_mongo:
 
 services:
-  mongo:
+  mongodb:
     image: mongo:4.2.1-bionic
     deploy:
       replicas: 1

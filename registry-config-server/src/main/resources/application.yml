@@ -1,0 +1,19 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+        prefix: /config
+  profiles:
+    active: native
+  application:
+    name: config-server
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

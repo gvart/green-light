@@ -1,6 +1,6 @@
 rootProject.name = "greenlight"
 
-include("config-server", "registry-service", "event-service")
+include("registry-config-server", "event-service", "user-service")
 
 
 val kotlinVersion: String by settings
