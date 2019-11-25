@@ -7,7 +7,7 @@ import com.greenlight.userservice.transfer.EventRequest
 import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.CommandLineRunner
-import org.springframework.data.geo.Point
+import com.greenlight.userservice.domain.Point
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 

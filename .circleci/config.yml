@@ -38,12 +38,12 @@ workflows:
   version: 2.1
   workflow:
     jobs:
-      - build
-        filters:
-          branches:
-            only:
-              - master
-              - develop
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
 notify:
   webhooks:
     - url: https://webhooks.gitter.im/e/bc2a3e3314343a3948ea

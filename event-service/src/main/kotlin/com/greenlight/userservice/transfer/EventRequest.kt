@@ -2,7 +2,7 @@ package com.greenlight.userservice.transfer
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.greenlight.userservice.domain.Event
-import org.springframework.data.geo.Point
+import com.greenlight.userservice.domain.Point
 
 import java.time.LocalDateTime
 import javax.validation.constraints.Min

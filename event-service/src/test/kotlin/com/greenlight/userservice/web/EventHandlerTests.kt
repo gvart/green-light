@@ -4,6 +4,7 @@ import com.greenlight.userservice.client.UserServiceClient
 import com.greenlight.userservice.config.RouterConfig
 import com.greenlight.userservice.domain.Event
 import com.greenlight.userservice.domain.EventStatus
+import com.greenlight.userservice.domain.Point
 import com.greenlight.userservice.extensions.printResponse
 import com.greenlight.userservice.repository.EventRepository
 import com.greenlight.userservice.service.EventService
@@ -15,16 +16,17 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
+import org.mockito.Mockito.spy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.data.geo.Point
 import org.springframework.http.MediaType
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
 import reactor.core.publisher.Mono
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @WebFluxTest
@@ -38,8 +40,9 @@ import java.time.LocalDateTime
 @ExtendWith(SpringExtension::class)
 class EventHandlerTests {
 
-    private val statusId = 1
-    private val eventStatus = EventStatus("statusId", "name", true)
+    private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+    private val statusId = "statusId"
+    private val eventStatus = EventStatus(statusId, "name", true)
 
     @Autowired
     private lateinit var webClient: WebTestClient
@@ -59,9 +62,10 @@ class EventHandlerTests {
     @BeforeEach
     fun setup() {
         runBlocking {
-            Mockito.`when`(eventStatusService.findOne("statusId")).thenReturn(eventStatus)
+            Mockito.`when`(eventStatusService.findOne(statusId)).thenReturn(eventStatus)
             Mockito.`when`(eventRepository.save(any<Event>())).thenAnswer {
-                Mono.just(it.getArgument(0, Event::class.java))
+                val argument = it.getArgument(0, Event::class.java)
+                Mono.just(argument)
             }
         }
     }
@@ -75,13 +79,11 @@ class EventHandlerTests {
             .printResponse()
             .expectStatus().isCreated
             .expectBody()
-//            .jsonPath("$.id").exists()
             .jsonPath("$.title").isEqualTo(request.title)
             .jsonPath("$.description").isEqualTo(request.description)
-//            .jsonPath("$.geoLocation").isEqualTo(request.geoLocation)
-            .jsonPath("$.startsAt").isEqualTo(request.startsAt)
+            .jsonPath("$.geoLocation.lat").isEqualTo(request.geoLocation.lat)
+            .jsonPath("$.geoLocation.lon").isEqualTo(request.geoLocation.lon)
+            .jsonPath("$.startsAt").isEqualTo(request.startsAt.format(formatter))
             .jsonPath("$.peopleRequired").isEqualTo(request.peopleRequired)
-
-
     }
 }

@@ -4,6 +4,7 @@ import com.greenlight.userservice.client.UserServiceClient
 import com.greenlight.userservice.domain.Event
 import com.greenlight.userservice.error.NotFoundException
 import com.greenlight.userservice.error.ValidationException
+import com.greenlight.userservice.extension.getMessages
 import com.greenlight.userservice.repository.EventRepository
 import com.greenlight.userservice.transfer.EventRequest
 import kotlinx.coroutines.flow.Flow
@@ -73,7 +74,7 @@ class EventService(
         val validationResult = validator.validate(eventRequest)
         if (validationResult.isNotEmpty()) {
             log.error("Errors present")
-            throw ValidationException("Invalid object", validationResult)
+            throw ValidationException("Invalid object", validationResult.getMessages())
         }
     }
 }
