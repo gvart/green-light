@@ -8,8 +8,6 @@ addons:
     token:
       secure: "B5oGXuQbc2VgWvpW0pdy9lZGnYC4REhZ3RvQNTCeRVra0WCPD1T6oy9TrxerowinzMsVWLF0Ei7/rbKyZ/3CAQ0sQ4OK/0WKU5KmCU60qRydFVK4cB4EWD8w5G8fdlbBKgY9bL5H4nBcAR6BR3wB/7SK2bhUyWnMU1rI7nqdwXLkG7t5EY4I40ErdOPpT7S354sO6tSFnMv+uEgbJX76ydmW5LqDMRkx45kQeVUdtHCfghKswg0Qy54TA+AN8mlOORFtu0iNFcnEa8Rze6EF/sJn57tXDEwPgpFaFrcNegFomvAsxIEFLOM4iJhGaQSjB7Mmnrn92iu/MHvtCrH47wQa6hnyHnVmOpVXscd1ZamY2TmNw8BWw40MauW70TkJJOW0rdxMvoOWQQtyRmhThZd+JHU2pzdj+4OtHJGiJC9ysFYgqkD/5IV8soHsWWMUTC5X/YhnzjCmQm4U9VZSCGek9gRr5AkoXb48mlm+W97Xs3wa5vXznvDmW2o+gVdo407Yb3a7RUyPPPJNTvuF5AOiKWgSM9pOYKdaUksE5wtR994pk4c5REGi47eEYPk3F3wqAaGr/1i+dRkM4zrQc73qmDThmaXNExxj0koo/H3a0J6RMX7iYLauy3XE0ppTZponkPJ6BnOl1L0vpO5/EGqWFVv2kjb+CwZv3AZ6rgo="
 
-script:
-  - ./gradlew sonarqube
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
