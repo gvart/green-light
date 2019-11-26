@@ -1,4 +1,4 @@
-package com.greenlight.userservice.web
+package com.greenlight.common.web.handler
 
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse

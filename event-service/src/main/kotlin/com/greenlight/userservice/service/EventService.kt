@@ -1,9 +1,9 @@
 package com.greenlight.userservice.service
 
+import com.greenlight.common.web.error.httperror.NotFoundException
+import com.greenlight.common.web.error.httperror.ValidationException
 import com.greenlight.userservice.client.UserServiceClient
 import com.greenlight.userservice.domain.Event
-import com.greenlight.userservice.error.NotFoundException
-import com.greenlight.userservice.error.ValidationException
 import com.greenlight.userservice.extension.getMessages
 import com.greenlight.userservice.repository.EventRepository
 import com.greenlight.userservice.transfer.EventRequest

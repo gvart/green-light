@@ -1,4 +1,4 @@
-package com.greenlight.userservice.error
+package com.greenlight.common.web.error.httperror
 
 /**
  * Base class that is related to HTTP errors

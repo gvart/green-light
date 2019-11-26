@@ -1,7 +1,8 @@
-package com.greenlight.userservice.config
+package com.greenlight.common.web.error
 
-import com.greenlight.userservice.error.HttpException
-import com.greenlight.userservice.error.NotFoundException
+import com.greenlight.common.web.error.httperror.HttpException
+import com.greenlight.common.web.error.httperror.NotFoundException
+import com.greenlight.common.web.error.httperror.ValidationException
 import org.springframework.boot.autoconfigure.web.ResourceProperties
 import org.springframework.boot.autoconfigure.web.ServerProperties
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler
@@ -18,7 +19,6 @@ import org.springframework.web.reactive.function.server.RouterFunctions.route
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
-import javax.validation.ValidationException
 
 @Order(-2)
 @Component
@@ -37,7 +37,7 @@ class GlobalErrorWebExceptionHandler(
     override fun getRoutingFunction(errorAttributes: ErrorAttributes) =
         route(all(), HandlerFunction { renderErrorResponse(it) })
 
-    override fun renderErrorResponse(request: ServerRequest): Mono<ServerResponse> {
+    public override fun renderErrorResponse(request: ServerRequest): Mono<ServerResponse> {
         val error = getError(request)
         val errorAttributes = getErrorAttributes(request, false)
         val status = when (error) {

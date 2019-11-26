@@ -1,4 +1,3 @@
-import com.google.cloud.tools.jib.api.Jib
 import com.google.cloud.tools.jib.gradle.JibExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -9,6 +8,7 @@ plugins {
     kotlin("jvm") apply false
     kotlin("plugin.spring") apply false
     jacoco
+    id("org.sonarqube")
 }
 
 repositories {
@@ -18,6 +18,7 @@ repositories {
 apply(plugin = "jacoco")
 
 subprojects {
+
     group = "com.greenlight"
 
     repositories {
@@ -31,10 +32,8 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.jvm")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-    apply(plugin = "com.google.cloud.tools.jib")
 
     val testImplementation by configurations
-
     dependencies {
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -50,7 +49,6 @@ subprojects {
             mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
         }
     }
-
 
     tasks.withType<Test> {
         useJUnitPlatform()
@@ -70,18 +68,29 @@ subprojects {
         }
     }
 
-    configure<JibExtension> {
-        from {
-            image = "azul/zulu-openjdk-alpine:11"
+    /*Just apply for microservices*/
+    if (this.name != "common-web") {
+        apply(plugin = "com.google.cloud.tools.jib")
+        configure<JibExtension> {
+            from {
+                image = "azul/zulu-openjdk-alpine:11"
 
-        }
-        to {
-            image = "gvart/greenlight-${project.name}"
-            tags = setOf(project.version.toString(), "latest")
+            }
+            to {
+                image = "gvart/greenlight-${project.name}"
+                tags = setOf(project.version.toString(), "latest")
+            }
         }
     }
 }
 
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "gvart_green-light")
+        property("sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/report.xml")
+    }
+}
 /**
  * Task to merge all binary (*.exec) files to a global report
  */

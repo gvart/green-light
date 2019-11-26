@@ -1,11 +1,17 @@
 package com.greenlight.userservice.web
 
+import com.greenlight.common.web.handler.CRUDHandler
 import com.greenlight.userservice.service.EventService
 import com.greenlight.userservice.transfer.EventRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.server.*
+import org.springframework.web.reactive.function.server.ServerRequest
+import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.awaitBody
+import org.springframework.web.reactive.function.server.bodyAndAwait
+import org.springframework.web.reactive.function.server.bodyValueAndAwait
+import org.springframework.web.reactive.function.server.buildAndAwait
 
 @Component
 class EventHandler(private val service: EventService) : CRUDHandler {

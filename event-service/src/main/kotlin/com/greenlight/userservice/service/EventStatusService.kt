@@ -1,7 +1,7 @@
 package com.greenlight.userservice.service
 
+import com.greenlight.common.web.error.httperror.NotFoundException
 import com.greenlight.userservice.domain.EventStatus
-import com.greenlight.userservice.error.NotFoundException
 import com.greenlight.userservice.repository.EventStatusRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow

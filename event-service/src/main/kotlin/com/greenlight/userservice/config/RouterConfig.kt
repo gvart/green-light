@@ -25,9 +25,7 @@ class RouterConfig(
                     GET("", eventHandler::findOne)
                     DELETE("", eventHandler::delete)
                     PUT("", eventHandler::update)
-
                 }
-
             }
         }
     }

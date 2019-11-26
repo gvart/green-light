@@ -5,7 +5,7 @@ val containerProperties = ContainerParameters().apply {
     jvmFlags = listOf()
 }
 dependencies {
-    val implementation by configurations
+    compile(project(":common-web"))
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
