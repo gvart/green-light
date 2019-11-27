@@ -1,9 +1,11 @@
 package com.greenlight.userservice.web
 
-import com.greenlight.userservice.config.RouterConfig
-import com.greenlight.userservice.domain.EventStatus
-import com.greenlight.userservice.repository.EventStatusRepository
-import com.greenlight.userservice.service.EventStatusService
+import com.greenlight.eventservice.config.RouterConfig
+import com.greenlight.eventservice.domain.EventStatus
+import com.greenlight.eventservice.repository.EventStatusRepository
+import com.greenlight.eventservice.service.EventStatusService
+import com.greenlight.eventservice.web.EventHandler
+import com.greenlight.eventservice.web.EventStatusHandler
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

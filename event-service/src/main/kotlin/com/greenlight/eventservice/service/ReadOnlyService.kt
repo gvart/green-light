@@ -1,4 +1,4 @@
-package com.greenlight.userservice.service
+package com.greenlight.eventservice.service
 
 import kotlinx.coroutines.flow.Flow
 

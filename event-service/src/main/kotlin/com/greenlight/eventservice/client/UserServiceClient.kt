@@ -1,6 +1,6 @@
-package com.greenlight.userservice.client
+package com.greenlight.eventservice.client
 
-import com.greenlight.userservice.transfer.UserResponse
+import com.greenlight.eventservice.transfer.UserResponse
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient

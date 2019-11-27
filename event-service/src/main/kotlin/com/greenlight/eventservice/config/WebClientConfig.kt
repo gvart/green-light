@@ -1,4 +1,4 @@
-package com.greenlight.userservice.config
+package com.greenlight.eventservice.config
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced
 import org.springframework.context.annotation.Configuration

@@ -1,6 +1,6 @@
-package com.greenlight.userservice.web
+package com.greenlight.eventservice.web
 
-import com.greenlight.userservice.service.EventStatusService
+import com.greenlight.eventservice.service.EventStatusService
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest

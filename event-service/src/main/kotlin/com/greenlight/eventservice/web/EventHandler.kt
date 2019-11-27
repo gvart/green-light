@@ -1,8 +1,8 @@
-package com.greenlight.userservice.web
+package com.greenlight.eventservice.web
 
 import com.greenlight.common.web.handler.CRUDHandler
-import com.greenlight.userservice.service.EventService
-import com.greenlight.userservice.transfer.EventRequest
+import com.greenlight.eventservice.service.EventService
+import com.greenlight.eventservice.transfer.EventRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component

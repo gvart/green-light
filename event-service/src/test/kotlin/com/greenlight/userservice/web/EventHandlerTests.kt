@@ -1,22 +1,23 @@
 package com.greenlight.userservice.web
 
-import com.greenlight.userservice.client.UserServiceClient
-import com.greenlight.userservice.config.RouterConfig
-import com.greenlight.userservice.domain.Event
-import com.greenlight.userservice.domain.EventStatus
-import com.greenlight.userservice.domain.Point
+import com.greenlight.eventservice.client.UserServiceClient
+import com.greenlight.eventservice.config.RouterConfig
+import com.greenlight.eventservice.domain.Event
+import com.greenlight.eventservice.domain.EventStatus
+import com.greenlight.eventservice.domain.Point
 import com.greenlight.userservice.extensions.printResponse
-import com.greenlight.userservice.repository.EventRepository
-import com.greenlight.userservice.service.EventService
-import com.greenlight.userservice.service.EventStatusService
-import com.greenlight.userservice.transfer.EventRequest
+import com.greenlight.eventservice.repository.EventRepository
+import com.greenlight.eventservice.service.EventService
+import com.greenlight.eventservice.service.EventStatusService
+import com.greenlight.eventservice.transfer.EventRequest
+import com.greenlight.eventservice.web.EventHandler
+import com.greenlight.eventservice.web.EventStatusHandler
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito
-import org.mockito.Mockito.spy
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -72,7 +73,14 @@ class EventHandlerTests {
 
     @Test
     fun createEventTest() {
-        val request = EventRequest("title", "description", "1", Point(0.0, 0.0), LocalDateTime.now(), 10)
+        val request = EventRequest(
+            "title",
+            "description",
+            "1",
+            Point(0.0, 0.0),
+            LocalDateTime.now(),
+            10
+        )
         webClient.post().uri("/api/v1/event").accept(MediaType.APPLICATION_JSON)
             .bodyValue(request)
             .exchange()

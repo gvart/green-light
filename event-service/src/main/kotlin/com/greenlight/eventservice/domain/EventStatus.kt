@@ -1,4 +1,4 @@
-package com.greenlight.userservice.domain
+package com.greenlight.eventservice.domain
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document

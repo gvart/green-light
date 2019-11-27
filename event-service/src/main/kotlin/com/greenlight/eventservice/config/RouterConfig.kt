@@ -1,7 +1,7 @@
-package com.greenlight.userservice.config
+package com.greenlight.eventservice.config
 
-import com.greenlight.userservice.web.EventHandler
-import com.greenlight.userservice.web.EventStatusHandler
+import com.greenlight.eventservice.web.EventHandler
+import com.greenlight.eventservice.web.EventStatusHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.coRouter

@@ -1,4 +1,4 @@
-package com.greenlight.userservice.extension
+package com.greenlight.eventservice.extension
 
 import javax.validation.ConstraintViolation
 

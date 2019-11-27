@@ -1,13 +1,13 @@
-package com.greenlight.userservice.initializer
+package com.greenlight.eventservice.initializer
 
-import com.greenlight.userservice.domain.EventStatus
-import com.greenlight.userservice.repository.EventStatusRepository
-import com.greenlight.userservice.service.EventService
-import com.greenlight.userservice.transfer.EventRequest
+import com.greenlight.eventservice.domain.EventStatus
+import com.greenlight.eventservice.repository.EventStatusRepository
+import com.greenlight.eventservice.service.EventService
+import com.greenlight.eventservice.transfer.EventRequest
 import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.CommandLineRunner
-import com.greenlight.userservice.domain.Point
+import com.greenlight.eventservice.domain.Point
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -31,10 +31,15 @@ class StatusInitializer(
 
             eventService.save(
                 EventRequest(
-                    "test", "description", eventStatusRepository.findAll().awaitFirst().id!!, Point(
+                    "test",
+                    "description",
+                    eventStatusRepository.findAll().awaitFirst().id!!,
+                    Point(
                         10.0,
                         10.0
-                    ), LocalDateTime.now(), 10
+                    ),
+                    LocalDateTime.now(),
+                    10
                 )
             )
         }

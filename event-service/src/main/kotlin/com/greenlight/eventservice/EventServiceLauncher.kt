@@ -1,4 +1,4 @@
-package com.greenlight.userservice
+package com.greenlight.eventservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

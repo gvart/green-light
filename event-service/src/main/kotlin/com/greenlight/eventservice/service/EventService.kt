@@ -1,12 +1,12 @@
-package com.greenlight.userservice.service
+package com.greenlight.eventservice.service
 
 import com.greenlight.common.web.error.httperror.NotFoundException
 import com.greenlight.common.web.error.httperror.ValidationException
-import com.greenlight.userservice.client.UserServiceClient
-import com.greenlight.userservice.domain.Event
-import com.greenlight.userservice.extension.getMessages
-import com.greenlight.userservice.repository.EventRepository
-import com.greenlight.userservice.transfer.EventRequest
+import com.greenlight.eventservice.client.UserServiceClient
+import com.greenlight.eventservice.domain.Event
+import com.greenlight.eventservice.extension.getMessages
+import com.greenlight.eventservice.repository.EventRepository
+import com.greenlight.eventservice.transfer.EventRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrElse

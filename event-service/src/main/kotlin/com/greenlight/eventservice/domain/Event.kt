@@ -1,4 +1,4 @@
-package com.greenlight.userservice.domain
+package com.greenlight.eventservice.domain
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.annotation.Id
