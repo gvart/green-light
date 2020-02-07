@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service
 
 @Service
 class EventStatusService(private val eventStatusRepository: EventStatusRepository) :
-    ReadOnlyService<EventStatus, String> {
+    ReadOnlyService<EventStatus, Long> {
 
     override fun findAll(): Flow<EventStatus> {
         return eventStatusRepository.findAll().asFlow()
     }
 
-    override suspend fun findOne(id: String): EventStatus {
+    override suspend fun findOne(id: Long): EventStatus {
         return eventStatusRepository.findById(id).
             awaitFirstOrElse { throw NotFoundException("Status $id not found") }
     }

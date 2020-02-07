@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTable-event_status
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_status
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: id
+                  type: smallint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_event_status
+              - column:
+                  name: name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: allow_actions
+                  type: boolean
+                  constraints:
+                    defaultValue: true
+                    nullable: false
+
+  - changeSet:
+      id: createTable-Event
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_event
+              - column:
+                  name: title
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(1024)
+              - column:
+                  name: event_status
+                  type: smallint
+                  constraints:
+                    foreignKeyName: fk_event_event_status
+                    references: event_status(id)
+              - column:
+                  name: geo_location
+                  type: jsonb
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: datetime
+              - column:
+                  name: starts_at
+                  type: datetime
+              - column:
+                  name: finished_at
+                  type: datetime
+              - column:
+                  name: author_id
+                  type: bigint
+              - column:
+                  name: people_required
+                  type: smallint
+

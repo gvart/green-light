@@ -17,7 +17,7 @@ import org.springframework.web.reactive.function.server.buildAndAwait
 class EventHandler(private val service: EventService) : CRUDHandler {
 
     override suspend fun findOne(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id")
+        val eventId = request.pathVariable("id").toLong()
         val event = service.findOne(eventId)
         return ServerResponse.ok()
             .contentType(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ class EventHandler(private val service: EventService) : CRUDHandler {
     }
 
     override suspend fun update(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id")
+        val eventId = request.pathVariable("id").toLong()
         val eventRequest = request.awaitBody<EventRequest>()
         val event = service.update(eventId, eventRequest)
         return ServerResponse.ok()
@@ -49,7 +49,7 @@ class EventHandler(private val service: EventService) : CRUDHandler {
     }
 
     override suspend fun delete(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id")
+        val eventId = request.pathVariable("id").toLong()
         service.delete(eventId)
         return ServerResponse.status(HttpStatus.NO_CONTENT).buildAndAwait()
     }

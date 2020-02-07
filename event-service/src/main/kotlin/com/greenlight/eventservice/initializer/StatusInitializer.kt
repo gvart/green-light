@@ -11,7 +11,7 @@ import com.greenlight.eventservice.domain.Point
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
-@Component
+//@Component
 class StatusInitializer(
     private val eventStatusRepository: EventStatusRepository,
     private val eventService: EventService

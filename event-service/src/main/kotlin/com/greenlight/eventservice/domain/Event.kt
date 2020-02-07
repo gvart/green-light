@@ -2,21 +2,20 @@ package com.greenlight.eventservice.domain
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.mapping.DBRef
-import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDateTime
 
-@Document
+
 data class Event(
     @Id
-    val id: String? = null,
+    val id: Long? = null,
 
     var title: String,
 
     var description: String,
 
-    @DBRef
-    var status: EventStatus? = null,
+    @Column("event_status")
+    var status: Long? = null,
 
     var geoLocation: Point,
 

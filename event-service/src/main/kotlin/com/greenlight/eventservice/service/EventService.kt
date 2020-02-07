@@ -21,7 +21,7 @@ class EventService(
     private val eventStatusService: EventStatusService,
     private val userServiceClient: UserServiceClient,
     private val validator: Validator
-) : ReadWriteService<Event, EventRequest, String> {
+) : ReadWriteService<Event, EventRequest, Long> {
 
     companion object {
         private val log = LoggerFactory.getLogger(EventService::class.java)
@@ -31,7 +31,7 @@ class EventService(
         return eventRepository.findAll().asFlow()
     }
 
-    override suspend fun findOne(id: String): Event = eventRepository.findById(id)
+    override suspend fun findOne(id: Long): Event = eventRepository.findById(id)
         .awaitFirstOrElse { throw NotFoundException("Event $id not found") }
 
 
@@ -44,13 +44,13 @@ class EventService(
         //userServiceClient.findUserById(1)
         val event = request.convert().apply {
             authorId = 1
-            status = eventStatus
+            status = eventStatus.id
         }
 
         return eventRepository.save(event).awaitSingle()
     }
 
-    override suspend fun update(id: String, request: EventRequest): Event {
+    override suspend fun update(id: Long, request: EventRequest): Event {
         validateEventRequest(request)
 
         val eventStatus = eventStatusService.findOne(request.statusId)
@@ -61,19 +61,19 @@ class EventService(
             description = request.description
             geoLocation = request.geoLocation
             peopleRequired = request.peopleRequired
-            status = eventStatus
+            status = eventStatus.id
         }
 
         return eventRepository.save(event).awaitSingle()
     }
 
-    override suspend fun delete(id: String): Void = eventRepository.deleteById(id).awaitSingle()
+    override suspend fun delete(id: Long): Void = eventRepository.deleteById(id).awaitSingle()
 
 
     private fun validateEventRequest(eventRequest: EventRequest) {
         val validationResult = validator.validate(eventRequest)
         if (validationResult.isNotEmpty()) {
-            log.error("Errors present")
+            log.error("Validation error {}", validationResult)
             throw ValidationException("Invalid object", validationResult.getMessages())
         }
     }

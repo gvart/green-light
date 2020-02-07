@@ -10,17 +10,17 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 data class EventRequest(
-    @NotBlank
+    @get:NotBlank
     val title: String,
     val description: String,
-    @NotBlank
-    val statusId: String,
-    @NotNull
+    @get:NotNull
+    val statusId: Long,
+    @get:NotNull
     val geoLocation: Point,
-    @NotNull
+    @get:NotNull
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     val startsAt: LocalDateTime,
-    @Min(1)
+    @get:Min(1)
     val peopleRequired: Int
 ) : DomainConverter<Event> {
 

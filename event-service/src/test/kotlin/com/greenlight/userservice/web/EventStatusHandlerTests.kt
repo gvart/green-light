@@ -42,9 +42,9 @@ class EventStatusHandlerTests {
     private lateinit var eventStatusRepository: EventStatusRepository
 
     private val events = arrayOf(
-        EventStatus("id1", "status1", false),
-        EventStatus("id2", "status2", false),
-        EventStatus("id3", "status3", false)
+        EventStatus(1L, "status1", false),
+        EventStatus(2L, "status2", false),
+        EventStatus(3L, "status3", false)
     )
 
     @BeforeEach

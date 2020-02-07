@@ -42,7 +42,7 @@ import java.time.format.DateTimeFormatter
 class EventHandlerTests {
 
     private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
-    private val statusId = "statusId"
+    private val statusId = 1L
     private val eventStatus = EventStatus(statusId, "name", true)
 
     @Autowired
@@ -76,7 +76,7 @@ class EventHandlerTests {
         val request = EventRequest(
             "title",
             "description",
-            "1",
+            1L,
             Point(0.0, 0.0),
             LocalDateTime.now(),
             10

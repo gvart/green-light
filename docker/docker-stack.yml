@@ -5,11 +5,14 @@ networks:
   back-tier:
 
 volumes:
-  gl_mongo:
+  gl_postgres:
 
 services:
-  mongodb:
-    image: mongo:4.2.1-bionic
+  postgres:
+    image: postgres:12
+    build:
+      context: ./docker-postgresql-multiple-databases
+      dockerfile: Dockerfile
     deploy:
       replicas: 1
       restart_policy:
@@ -17,9 +20,11 @@ services:
     networks:
       - back-tier
     ports:
-      - 27017:27017
+      - 5432:5432
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=mongo
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_MULTIPLE_DATABASES=event_service,user_service,auth_service,donation_service
     volumes:
-      - gl_mongo:/data/db
+      - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+      - gl_postgres:/var/lib/postgresql
