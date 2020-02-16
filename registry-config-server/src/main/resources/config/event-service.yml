@@ -11,11 +11,15 @@ spring:
     date-format: dd/MM/yyyy HH:mm:ss
   webflux:
     date-format: dd/MM/yyyy HH:mm:ss
-  data:
-    mongodb:
-      username: mongo
-      password: password
-      database: event_service
-      port: 27017
-      host: localhost
-      authentication-database: admin
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/event_service
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  datasource:
+    username: postgres
+    password: password
+    url: jdbc:postgresql://localhost:5432/event_service
+    type: org.postgresql.ds.PGSimpleDataSource
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml

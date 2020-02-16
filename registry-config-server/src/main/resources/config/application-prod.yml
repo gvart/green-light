@@ -1,0 +1,4 @@
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://auth-service:8100/oauth/users/current

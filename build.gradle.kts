@@ -6,6 +6,7 @@ plugins {
     id("io.spring.dependency-management")
     id("com.google.cloud.tools.jib") apply false
     kotlin("jvm") apply false
+    kotlin("plugin.noarg") apply false
     kotlin("plugin.spring") apply false
     jacoco
     id("org.sonarqube")
@@ -31,7 +32,12 @@ subprojects {
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+
+    configure<org.jetbrains.kotlin.noarg.gradle.NoArgExtension> {
+        annotation("javax.persistence.Entity")
+    }
 
     val testImplementation by configurations
     dependencies {

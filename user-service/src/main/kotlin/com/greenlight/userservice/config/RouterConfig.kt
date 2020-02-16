@@ -11,7 +11,7 @@ class RouterConfig(private val userHandler: UserHandler) {
     @Bean
     fun router() = coRouter {
         "/api/v1".nest {
-            "/user-service".nest {
+            "/user".nest {
                 GET("", userHandler::findAll)
                 POST("", userHandler::save)
                 "/{id}".nest {

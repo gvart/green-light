@@ -2,6 +2,7 @@ package com.greenlight.eventservice.service
 
 import com.greenlight.common.web.error.httperror.NotFoundException
 import com.greenlight.common.web.error.httperror.ValidationException
+import com.greenlight.common.web.handler.service.ReadWriteService
 import com.greenlight.eventservice.client.UserServiceClient
 import com.greenlight.eventservice.domain.Event
 import com.greenlight.eventservice.extension.getMessages

@@ -1,0 +1,9 @@
+client_id,grant_type_id
+donation-service,1
+event-service,1
+notification-service,1
+user-service,1
+mobile-app,2
+mobile-app,3
+web-app,2
+web-app,3

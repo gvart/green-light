@@ -1,0 +1,38 @@
+server:
+  port: 8100
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8888/eureka/
+
+spring:
+  jackson:
+    date-format: dd/MM/yyyy HH:mm:ss
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/event_service
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  datasource:
+    username: postgres
+    password: password
+    url: jdbc:postgresql://postgres:5432/auth_service
+    type: org.postgresql.ds.PGSimpleDataSource
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+    client:
+      client-id: auth-service
+      client-secret: 123456
+      access-token-uri: http://auth-service:8100/oauth/token
+      grant-type: client_credentials
+      scope: server
+    validity:
+      access-token: 3600
+      refresh-token: 86400

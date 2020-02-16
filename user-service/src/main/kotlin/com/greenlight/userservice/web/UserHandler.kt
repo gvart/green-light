@@ -1,29 +1,22 @@
 package com.greenlight.userservice.web
 
 import com.greenlight.common.web.handler.CRUDHandler
+import com.greenlight.userservice.domain.User
+import com.greenlight.userservice.service.UserService
+import com.greenlight.userservice.transfer.UserRequest
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
-import org.springframework.web.reactive.function.server.ServerResponse
+import org.springframework.web.reactive.function.server.awaitBody
 
 @Component
-class UserHandler : CRUDHandler {
-    override suspend fun save(request: ServerRequest): ServerResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class UserHandler(userService: UserService) : CRUDHandler<User, UserRequest, Long>(userService) {
+
+    override suspend fun extractBody(request: ServerRequest): UserRequest {
+        return request.awaitBody()
     }
 
-    override suspend fun update(request: ServerRequest): ServerResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override suspend fun extractId(request: ServerRequest): Long {
+        return request.pathVariable("id").toLong()
     }
 
-    override suspend fun findAll(request: ServerRequest): ServerResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun findOne(request: ServerRequest): ServerResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override suspend fun delete(request: ServerRequest): ServerResponse {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

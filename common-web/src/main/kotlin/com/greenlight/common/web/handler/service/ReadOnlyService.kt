@@ -1,4 +1,4 @@
-package com.greenlight.eventservice.service
+package com.greenlight.common.web.handler.service
 
 import kotlinx.coroutines.flow.Flow
 

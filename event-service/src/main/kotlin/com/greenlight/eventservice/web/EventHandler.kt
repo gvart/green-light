@@ -1,6 +1,7 @@
 package com.greenlight.eventservice.web
 
 import com.greenlight.common.web.handler.CRUDHandler
+import com.greenlight.eventservice.domain.Event
 import com.greenlight.eventservice.service.EventService
 import com.greenlight.eventservice.transfer.EventRequest
 import org.springframework.http.HttpStatus
@@ -14,43 +15,13 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 import org.springframework.web.reactive.function.server.buildAndAwait
 
 @Component
-class EventHandler(private val service: EventService) : CRUDHandler {
+class EventHandler(service: EventService) : CRUDHandler<Event, EventRequest, Long>(service) {
 
-    override suspend fun findOne(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id").toLong()
-        val event = service.findOne(eventId)
-        return ServerResponse.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValueAndAwait(event)
+    override suspend fun extractBody(request: ServerRequest): EventRequest {
+        return request.awaitBody()
     }
 
-    override suspend fun findAll(request: ServerRequest): ServerResponse {
-        val events = service.findAll()
-        return ServerResponse.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyAndAwait(events)
-    }
-
-    override suspend fun save(request: ServerRequest): ServerResponse {
-        val eventRequest = request.awaitBody<EventRequest>()
-        val event = service.save(eventRequest)
-        return ServerResponse.status(HttpStatus.CREATED)
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValueAndAwait(event)
-    }
-
-    override suspend fun update(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id").toLong()
-        val eventRequest = request.awaitBody<EventRequest>()
-        val event = service.update(eventId, eventRequest)
-        return ServerResponse.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .bodyValueAndAwait(event)
-    }
-
-    override suspend fun delete(request: ServerRequest): ServerResponse {
-        val eventId = request.pathVariable("id").toLong()
-        service.delete(eventId)
-        return ServerResponse.status(HttpStatus.NO_CONTENT).buildAndAwait()
+    override suspend fun extractId(request: ServerRequest): Long {
+        return request.pathVariable("id").toLong()
     }
 }

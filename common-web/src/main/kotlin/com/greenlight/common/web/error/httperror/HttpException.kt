@@ -6,8 +6,13 @@ package com.greenlight.common.web.error.httperror
  */
 open class HttpException(
     private val statusCode: Int,
-    private val errorMessage: String,
-    private val optionalMessages: List<String> = emptyList()
+    private val error: String,
+    private var errorMessage: String,
+    private val optionalMessages: Map<String, String>? = null
 ) : Exception(errorMessage) {
+
     fun getStatusCode() = statusCode
+    fun getError() = error
+    fun getErrorMessage() = errorMessage
+    fun getOptionalMessages() = optionalMessages
 }

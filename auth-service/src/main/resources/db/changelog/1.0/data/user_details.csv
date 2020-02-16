@@ -1,0 +1,2 @@
+username,password,enabled,expired,locked,failed_login_attempts,created_at
+admin,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,false,false,0,now

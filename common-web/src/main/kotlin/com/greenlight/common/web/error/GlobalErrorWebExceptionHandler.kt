@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.server.HandlerFunction
 import org.springframework.web.reactive.function.server.RequestPredicates.all
+import org.springframework.web.reactive.function.server.RouterFunction
 import org.springframework.web.reactive.function.server.RouterFunctions.route
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
@@ -34,22 +35,23 @@ class GlobalErrorWebExceptionHandler(
         super.setMessageWriters(serverCodecConfigurer.writers)
     }
 
-    override fun getRoutingFunction(errorAttributes: ErrorAttributes) =
+    override fun getRoutingFunction(errorAttributes: ErrorAttributes): RouterFunction<ServerResponse> =
         route(all(), HandlerFunction { renderErrorResponse(it) })
 
     public override fun renderErrorResponse(request: ServerRequest): Mono<ServerResponse> {
         val error = getError(request)
         val errorAttributes = getErrorAttributes(request, false)
-        val status = when (error) {
-            is ValidationException -> 400
-            is NotFoundException -> 404
-            else -> getHttpStatus(errorAttributes)
-        }
-        if (error is HttpException) {
-            errorAttributes["message"] = error.message
+        if(error is HttpException) {
+            errorAttributes["status"] = error.getStatusCode()
+            errorAttributes["error"] = error.getError()
+            errorAttributes["message"] = error.getErrorMessage()
+
+            if (error.getOptionalMessages() != null) {
+                errorAttributes["optionalMessages"] = error.getOptionalMessages()
+            }
         }
 
-        return ServerResponse.status(status).contentType(MediaType.APPLICATION_JSON)
+        return ServerResponse.status(errorAttributes["status"] as Int).contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(errorAttributes))
     }
 }

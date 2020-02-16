@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - property:
+      name: now
+      value: now()
+      dbms: h2
+  - property:
+      name: now
+      value: current_timestamp
+      dbms: postgresql
+
+  - changeSet:
+      id: load-default
+      author: gvart
+      changes:
+        - loadData:
+            tableName: oauth_grant_type
+            remarks: Load default grant types
+            encoding: UTF-8
+            file: db/changelog/1.0/data/grant_types.csv
+
+  - changeSet:
+      id: load-default-authorities
+      author: gvart
+      changes:
+        - loadData:
+            tableName: authority
+            remarks: Load default authorities
+            encoding: UTF-8
+            file: db/changelog/1.0/data/authority.csv
+
+  - changeSet:
+      id: load-default-scopes
+      author: gvart
+      changes:
+        - loadData:
+            tableName: oauth_scope
+            remarks: Load default scopes
+            encoding: UTF-8
+            file: db/changelog/1.0/data/scope.csv
+
+  - changeSet:
+      id: load-default-users
+      author: gvart
+      changes:
+        - loadData:
+            tableName: user_details
+            remarks: Load default user
+            encoding: UTF-8
+            file: db/changelog/1.0/data/user_details.csv
+
+  - changeSet:
+      id: load-default-users-authorities
+      author: gvart
+      changes:
+        - loadData:
+            tableName: user_details_authority
+            remarks: Load default roles for admin user
+            encoding: UTF-8
+            file: db/changelog/1.0/data/user_details_authority.csv
+
+  - changeSet:
+      id: load-default-client-details
+      author: gvart
+      changes:
+        - loadData:
+            tableName: client_details
+            remarks: Load default clients
+            encoding: UTF-8
+            file: db/changelog/1.0/data/client_details.csv
+
+  - changeSet:
+      id: load-default-client-details-grant-types
+      author: gvart
+      changes:
+        - loadData:
+            tableName: client_details_grant_type
+            remarks: Load default clients grant types
+            encoding: UTF-8
+            file: db/changelog/1.0/data/client_details_grant_type.csv
+
+  - changeSet:
+      id: load-default-client-details-scopes
+      author: gvart
+      changes:
+        - loadData:
+            tableName: client_details_scope
+            remarks: Load default clients grant types
+            encoding: UTF-8
+            file: db/changelog/1.0/data/client_details_scope.csv

@@ -1,6 +1,7 @@
 package com.greenlight.eventservice.service
 
 import com.greenlight.common.web.error.httperror.NotFoundException
+import com.greenlight.common.web.handler.service.ReadOnlyService
 import com.greenlight.eventservice.domain.EventStatus
 import com.greenlight.eventservice.repository.EventStatusRepository
 import kotlinx.coroutines.flow.Flow
