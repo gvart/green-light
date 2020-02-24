@@ -10,9 +10,12 @@ import com.greenlight.eventservice.repository.EventRepository
 import com.greenlight.eventservice.transfer.EventRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.reactive.awaitFirstOrElse
 import kotlinx.coroutines.reactive.awaitSingle
 import org.slf4j.LoggerFactory
+import org.springframework.security.core.context.ReactiveSecurityContextHolder
+import org.springframework.security.oauth2.provider.OAuth2Authentication
 import org.springframework.stereotype.Service
 import javax.validation.Validator
 
@@ -40,11 +43,10 @@ class EventService(
         validateEventRequest(request)
 
         val eventStatus = eventStatusService.findOne(request.statusId)
-
-        //todo get userid from token
-        //userServiceClient.findUserById(1)
+        val authentication = ReactiveSecurityContextHolder.getContext().map { it.authentication.principal }.awaitFirst()
+        val userId = userServiceClient.findUserById(1).awaitFirst()
         val event = request.convert().apply {
-            authorId = 1
+            authorId = userId.id
             status = eventStatus.id
         }
 

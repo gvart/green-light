@@ -1,7 +1,7 @@
 package com.greenlight.eventservice.domain
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import javax.persistence.Id
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import java.time.LocalDateTime
 

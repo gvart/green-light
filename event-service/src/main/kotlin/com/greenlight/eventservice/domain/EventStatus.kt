@@ -1,6 +1,7 @@
 package com.greenlight.eventservice.domain
 
-import javax.persistence.Id
+import org.springframework.data.annotation.Id
+
 
 data class EventStatus(
     @Id

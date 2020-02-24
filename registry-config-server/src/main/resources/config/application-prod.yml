@@ -1,4 +1,39 @@
 security:
   oauth2:
+    client:
+      grant-type: client_credentials
+      access-token-uri: http://auth-service:8100/oauth/token
     resource:
+      id: ${spring.application.name}
       user-info-uri: http://auth-service:8100/oauth/users/current
+      token-info-uri: http://auth-service:8100/oauth/check_token
+
+
+greenlight:
+  security:
+    oauth2:
+      jwt:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-pair-alias: oauth2
+        key-pair-password: password
+        public-key: classpath:oauth2.pub
+
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false #in order to use spring load balancer
+  jackson:
+    date-format: dd/MM/yyyy HH:mm:ss
+  webflux:
+    date-format: dd/MM/yyyy HH:mm:ss
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8888/eureka/
+  instance:
+    metadata-map:
+      rsocket-port: ${spring.rsocket.server.port}

@@ -1,18 +1,9 @@
 server:
   port: 8200
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8888/eureka/
-
 spring:
-  jackson:
-    date-format: dd/MM/yyyy HH:mm:ss
-  webflux:
-    date-format: dd/MM/yyyy HH:mm:ss
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/user_service
+    url: r2dbc:postgresql://postgres:5432/user_service
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
   datasource:
@@ -23,3 +14,19 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  rsocket:
+    server:
+      port: 7500
+
+security:
+  oauth2:
+    client:
+      client-id: user-service
+      client-secret: 123456
+
+greenlight:
+  security:
+    oauth2:
+      resource:
+        auto-configure: true

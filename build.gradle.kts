@@ -75,7 +75,7 @@ subprojects {
     }
 
     /*Just apply for microservices*/
-    if (this.name != "common-web") {
+    if (this.name != "common") {
         apply(plugin = "com.google.cloud.tools.jib")
         configure<JibExtension> {
             from {

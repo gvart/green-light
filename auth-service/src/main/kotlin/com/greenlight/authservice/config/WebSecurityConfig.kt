@@ -1,11 +1,11 @@
 package com.greenlight.authservice.config
 
+import com.greenlight.authservice.config.endpoint.SecurityEndpoints
 import com.greenlight.authservice.security.UserDetailsServiceImpl
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 class WebSecurityConfig(
     private val userDetailsService: UserDetailsServiceImpl
 ) : WebSecurityConfigurerAdapter() {
@@ -22,8 +21,7 @@ class WebSecurityConfig(
         http
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/oauth/token", "/actuator/prometheus").permitAll()
-            .antMatchers("/check_token").permitAll()
+            .antMatchers(*SecurityEndpoints.PERMIT_ALL).permitAll()
             .anyRequest().authenticated()
     }
 

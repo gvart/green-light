@@ -1,0 +1,1 @@
+https://blog.marcosbarbero.com/centralized-authorization-jwt-spring-boot2/ - OAUTH2 authorization / resource server configuration

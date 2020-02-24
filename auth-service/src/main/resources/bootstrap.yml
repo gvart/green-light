@@ -1,8 +1,9 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: auth-service
   cloud:
     config:
       fail-fast: true
       uri: http://localhost:8888/config
-

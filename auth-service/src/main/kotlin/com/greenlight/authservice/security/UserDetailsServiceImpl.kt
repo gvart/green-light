@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class UserDetailsServiceImpl(private val OAuthUserRepository: OAuthUserRepository) : UserDetailsService {
+class UserDetailsServiceImpl(private val oAuthUserRepository: OAuthUserRepository) : UserDetailsService {
     override fun loadUserByUsername(username: String): OAuth2UserDetails {
-        return OAuthUserRepository.findByUsernameIgnoreCase(username)
+        return oAuthUserRepository.findByUsernameIgnoreCase(username)
             .orElseThrow { UsernameNotFoundException(username) }
     }
 }

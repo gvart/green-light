@@ -1,6 +1,6 @@
 package com.greenlight.userservice.domain
 
-import javax.persistence.Id
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDate
 

@@ -1,20 +1,23 @@
 package com.greenlight.eventservice.client
 
-import com.greenlight.eventservice.transfer.UserResponse
-import org.springframework.http.MediaType
+import com.greenlight.eventservice.config.RSocketConfig.Companion.USER_SERVICE_CLIENT_BEAN_ID
+import com.greenlight.eventservice.transfer.IdRequest
+import com.greenlight.eventservice.transfer.IdResponse
+import kotlinx.coroutines.reactive.awaitFirst
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.awaitBody
-import org.springframework.web.reactive.function.client.awaitExchange
+import reactor.core.publisher.Mono
 
 @Component
-class UserServiceClient(webClientBuilder: WebClient.Builder) {
-    private val webClient: WebClient = webClientBuilder.baseUrl("http://user-service/api/v1").build()
+class UserServiceClient(
+    @Qualifier(USER_SERVICE_CLIENT_BEAN_ID) private val userServiceClient: Mono<RSocketRequester>
+) {
 
-    suspend fun findUserById(id: Long): UserResponse {
-        return webClient.get().uri("/user/$id").accept(MediaType.APPLICATION_JSON)
-            .awaitExchange()
-            .awaitBody()
+
+    fun findUserById(id: Long): Mono<IdResponse> {
+        return userServiceClient.flatMap {
+            it.route("user/find").data(IdRequest(id)).retrieveMono(IdResponse::class.java)
+        }
     }
 }
-

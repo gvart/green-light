@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.greenlight.common.security.resourceserver.ResourceServerAutoConfig

@@ -124,8 +124,6 @@ databaseChangeLog:
               - column:
                   name: refresh_token
                   type: TEXT
-                  constraints:
-                    nullable: false
 
         - createTable:
             tableName: oauth_refresh_token

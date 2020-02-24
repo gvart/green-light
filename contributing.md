@@ -12,6 +12,6 @@ Please ensure your pull request adheres to the following guidelines:
 - Check your spelling and grammar.
 - Make sure your text editor is set to remove trailing whitespace.
 - Use the `#readme` anchor for GitHub READMEs to link them directly
-- To add a new feature create a new branch which follows `feature/FEATURE_NAME` pattern. For bug fixes use `bugfix/FEATURE_NAME` pattern.
+- To add a new feature create a new branch which follows `feature/#ISSUE_NUMBER#` pattern. For bug fixes use `bugfix/#ISSUE_NUMBER#` pattern.
 
 Thank you for your suggestions!
