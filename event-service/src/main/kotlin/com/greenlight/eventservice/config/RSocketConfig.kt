@@ -15,7 +15,7 @@ class RSocketConfig(
 ) {
 
     companion object {
-        const val USER_SERVICE_CLIENT_BEAN_ID = "userRSocketService"
+        const val USER_SERVICE_CLIENT_BEAN_ID = "userRSocketClient"
     }
 
     @Bean(USER_SERVICE_CLIENT_BEAN_ID)

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service
 @Service
 class UserDetailsServiceImpl(private val oAuthUserRepository: OAuthUserRepository) : UserDetailsService {
     override fun loadUserByUsername(username: String): OAuth2UserDetails {
-        return oAuthUserRepository.findByUsernameIgnoreCase(username)
-            .orElseThrow { UsernameNotFoundException(username) }
+        return oAuthUserRepository.findByUsernameIgnoreCase(username) ?: throw UsernameNotFoundException(username)
     }
 }

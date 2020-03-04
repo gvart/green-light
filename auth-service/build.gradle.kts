@@ -16,6 +16,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
     implementation("org.springframework.security:spring-security-jwt")
 
+    implementation("org.springframework.boot:spring-boot-starter-rsocket")
+
     runtime("org.postgresql:postgresql")
     implementation("org.liquibase:liquibase-core")
     //kotlin specific

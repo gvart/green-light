@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service
 
 @Service
 @Primary
-class ClientDetailsServiceImpl(private val repositoryOAuth2Details: OAuth2ClientDetailsRepository) : ClientDetailsService {
+class ClientDetailsServiceImpl(private val repositoryOAuth2Details: OAuth2ClientDetailsRepository) :
+    ClientDetailsService {
     override fun loadClientByClientId(clientId: String): OAuth2ClientDetails {
         return repositoryOAuth2Details.findById(clientId)
             .orElseThrow { ClientRegistrationException("Client $clientId not found") }

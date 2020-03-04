@@ -1,4 +1,4 @@
-package com.greenlight.userservice.rsocket
+package com.greenlight.userservice.reactive.rsocket
 
 import com.greenlight.userservice.service.UserService
 import com.greenlight.userservice.transfer.IdRequest

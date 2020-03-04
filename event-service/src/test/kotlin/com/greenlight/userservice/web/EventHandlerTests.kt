@@ -1,27 +1,30 @@
 package com.greenlight.userservice.web
 
 import com.greenlight.eventservice.client.UserServiceClient
-import com.greenlight.eventservice.config.RouterConfig
 import com.greenlight.eventservice.domain.Event
 import com.greenlight.eventservice.domain.EventStatus
 import com.greenlight.eventservice.domain.Point
-import com.greenlight.userservice.extensions.printResponse
 import com.greenlight.eventservice.repository.EventRepository
 import com.greenlight.eventservice.service.EventService
 import com.greenlight.eventservice.service.EventStatusService
 import com.greenlight.eventservice.transfer.EventRequest
 import com.greenlight.eventservice.web.EventHandler
 import com.greenlight.eventservice.web.EventStatusHandler
+import com.greenlight.userservice.extensions.printResponse
+import com.greenlight.userservice.testconfig.WebTestConfig
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
 import org.mockito.Mockito
+import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -29,11 +32,11 @@ import reactor.core.publisher.Mono
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
+@WithMockUser
 @WebFluxTest
 @ContextConfiguration(
     classes = [
-        RouterConfig::class,
+        WebTestConfig::class,
         EventHandler::class,
         EventService::class
     ]
@@ -44,6 +47,7 @@ class EventHandlerTests {
     private val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
     private val statusId = 1L
     private val eventStatus = EventStatus(statusId, "name", true)
+
 
     @Autowired
     private lateinit var webClient: WebTestClient
@@ -60,9 +64,13 @@ class EventHandlerTests {
     @MockBean
     private lateinit var eventRepository: EventRepository
 
+    @Mock
+    private lateinit var logger: Logger
+
     @BeforeEach
     fun setup() {
         runBlocking {
+            Mockito.`when`(eventStatusService.getLogger()).thenReturn(logger)
             Mockito.`when`(eventStatusService.findOne(statusId)).thenReturn(eventStatus)
             Mockito.`when`(eventRepository.save(any<Event>())).thenAnswer {
                 val argument = it.getArgument(0, Event::class.java)

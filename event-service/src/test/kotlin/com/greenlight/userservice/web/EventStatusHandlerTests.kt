@@ -1,11 +1,11 @@
 package com.greenlight.userservice.web
 
-import com.greenlight.eventservice.config.RouterConfig
 import com.greenlight.eventservice.domain.EventStatus
 import com.greenlight.eventservice.repository.EventStatusRepository
 import com.greenlight.eventservice.service.EventStatusService
 import com.greenlight.eventservice.web.EventHandler
 import com.greenlight.eventservice.web.EventStatusHandler
+import com.greenlight.userservice.testconfig.WebTestConfig
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -14,19 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
 import reactor.core.publisher.Flux
 
 
+@WithMockUser
 @WebFluxTest
 @ContextConfiguration(
     classes = [
-        RouterConfig::class,
+        WebTestConfig::class,
         EventStatusHandler::class,
-        EventStatusService::class,
-        EventStatusRepository::class
+        EventStatusService::class
     ]
 )
 @ExtendWith(SpringExtension::class)

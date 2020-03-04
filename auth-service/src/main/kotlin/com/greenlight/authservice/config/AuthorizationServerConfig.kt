@@ -10,11 +10,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer
 import org.springframework.security.oauth2.provider.ClientDetailsService
-import org.springframework.security.oauth2.provider.approval.ApprovalStore
-import org.springframework.security.oauth2.provider.token.AccessTokenConverter
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter
 import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 
 @Configuration
 @EnableAuthorizationServer
@@ -22,9 +21,9 @@ class AuthorizationServerConfig(
     private val tokenStore: TokenStore,
     private val clientDetailsService: ClientDetailsService,
     private val authenticationManager: AuthenticationManager,
-    private val accessTokenConverter: AccessTokenConverter,
-    val approvalStore: ApprovalStore,
-    val userDetailsService: UserDetailsServiceImpl
+    private val accessTokenConverter: JwtAccessTokenConverter,
+//    private val approvalStore: ApprovalStore,
+    private val userDetailsService: UserDetailsServiceImpl
 ) : AuthorizationServerConfigurerAdapter() {
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {
@@ -38,11 +37,11 @@ class AuthorizationServerConfig(
     }
 
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
-        endpoints.approvalStore(approvalStore)
+        endpoints/*.approvalStore(approvalStore)*/
+            .tokenEnhancer(accessTokenConverter)
             .authenticationManager(authenticationManager)
             .tokenStore(tokenStore)
             .userDetailsService(userDetailsService)
-            .accessTokenConverter(accessTokenConverter)
     }
 
 

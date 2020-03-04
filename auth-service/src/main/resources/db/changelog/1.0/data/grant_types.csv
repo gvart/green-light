@@ -1,6 +1,6 @@
 id,name
-1,client_credentials
-2,password
-3,refresh_token
-4,implicit
-5,device_code
+1 ,client_credentials
+2 ,password
+3 ,refresh_token
+4 ,implicit
+5 ,device_code

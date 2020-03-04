@@ -1,4 +1,4 @@
-package com.greenlight.eventservice.transfer
+package com.greenlight.common.transfer
 
 interface DomainConverter<T> {
     fun convert(): T

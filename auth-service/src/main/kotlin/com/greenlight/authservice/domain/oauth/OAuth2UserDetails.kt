@@ -35,11 +35,11 @@ data class OAuth2UserDetails(
         joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "authority_id", referencedColumnName = "id")]
     )
-    private val authorities: MutableCollection<Authority>,
+    private val authorities: MutableSet<Authority>,
     private val createdAt: LocalDate,
     private val updatedAt: LocalDate
 ) : UserDetails {
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+    override fun getAuthorities(): MutableSet<Authority> {
         return authorities
     }
 
@@ -66,6 +66,8 @@ data class OAuth2UserDetails(
     override fun isAccountNonLocked(): Boolean {
         return !locked
     }
+
+    fun getId() = id
 }
 
 

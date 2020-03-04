@@ -8,4 +8,7 @@ import reactor.core.publisher.Mono
 interface UserRepository : R2dbcRepository<User, Long> {
     @Query("SELECT * from users where nick_name = $1 limit 1")
     fun findByNickName(nickname: String): Mono<User>
+
+    @Query("SELECT * from users where email = $1 limit 1")
+    fun findByEmailAddress(nickname: String): Mono<User>
 }

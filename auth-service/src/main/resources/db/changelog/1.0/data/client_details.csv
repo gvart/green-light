@@ -1,7 +1,7 @@
-id,client_secret,auto_approve,access_token_validity,refresh_token_validity
-donation-service,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
-event-service,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
-notification-service,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
-user-service,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
-mobile-app,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
-web-app,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true,3600,84600
+id                  ,client_secret                                               ,auto_approve,access_token_validity,refresh_token_validity
+donation-service    ,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600
+event-service       ,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600
+notification-service,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600
+user-service        ,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600
+mobile-app          ,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600
+web-app             ,$2a$10$aR0OknfsaCqL02NrU/XBA.HHO3pjo0JBns5eMq1lWtnHtvtOUgwIm,true        ,3600                 ,84600

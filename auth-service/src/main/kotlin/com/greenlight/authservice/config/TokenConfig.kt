@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.oauth2.provider.approval.TokenApprovalStore
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices
@@ -63,12 +62,12 @@ class TokenConfig(
         return tokenServices
     }
 
-    @Bean
-    fun approvalStore(tokenStore: TokenStore): TokenApprovalStore {
-        val approvalStore = TokenApprovalStore()
-        approvalStore.setTokenStore(tokenStore)
-        return approvalStore
-    }
+//    @Bean
+//    fun approvalStore(tokenStore: TokenStore): TokenApprovalStore {
+//        val approvalStore = TokenApprovalStore()
+//        approvalStore.setTokenStore(tokenStore)
+//        return approvalStore
+//    }
 
     @Bean
     fun userApprovalTokenStore(

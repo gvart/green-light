@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway
+  cloud:
+    config:
+      fail-fast: true
+      uri: http://localhost:8888/config
+
+
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/v1/auth
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fallbackCommand
+                fallbackUri: forward:/fallback
+        - id: event-service
+          uri: lb://event-service
+          predicates:
+            - Path=/api/v1/event
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fallbackCommand
+                fallbackUri: forward:/fallback
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/v1/user
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fallbackCommand
+                fallbackUri: forward:/fallback

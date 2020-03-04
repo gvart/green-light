@@ -1,7 +1,7 @@
 version = "0.0.1-SNAPSHOT"
 
 dependencies {
-//    todo remove starters and replace with dependencies itself
+    //    todo remove starters and replace with dependencies itself
     compileOnly("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     compileOnly("org.springframework.cloud:spring-cloud-starter-oauth2")
     compileOnly("org.springframework.boot:spring-boot-starter-webflux")

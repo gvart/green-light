@@ -1,6 +1,6 @@
 package com.greenlight.common.web.handler
 
-import com.greenlight.common.web.handler.service.ReadWriteService
+import com.greenlight.common.service.AbstractCoroutineReadWriteService
 import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.reactor.asFlux
 import org.springframework.core.ParameterizedTypeReference
@@ -13,12 +13,12 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 import org.springframework.web.reactive.function.server.buildAndAwait
 
 
-abstract class CRUDHandler<T : Any, D, I>(private val readWriteService: ReadWriteService<T, D, I>) {
+abstract class CRUDHandler<T : Any, D, I>(private val readWriteService: AbstractCoroutineReadWriteService<T, D, I>) {
 
     abstract suspend fun extractBody(request: ServerRequest): D
     abstract suspend fun extractId(request: ServerRequest): I
 
-    suspend fun save(request: ServerRequest): ServerResponse {
+    open suspend fun save(request: ServerRequest): ServerResponse {
         val body = extractBody(request)
         val savedEntity = readWriteService.save(body)
         return ServerResponse.status(HttpStatus.CREATED)
@@ -26,7 +26,7 @@ abstract class CRUDHandler<T : Any, D, I>(private val readWriteService: ReadWrit
             .bodyValueAndAwait(savedEntity)
     }
 
-    suspend fun update(request: ServerRequest): ServerResponse {
+    open suspend fun update(request: ServerRequest): ServerResponse {
         val id = extractId(request)
         val body = extractBody(request)
         val savedEntity = readWriteService.update(id, body)

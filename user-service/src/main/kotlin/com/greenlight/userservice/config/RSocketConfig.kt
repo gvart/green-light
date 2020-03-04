@@ -1,7 +1,6 @@
 package com.greenlight.userservice.config
 
 import com.greenlight.common.rsocket.factory.RSocketClientFactory
-import io.rsocket.client.LoadBalancedRSocketMono
 import org.springframework.cloud.client.discovery.DiscoveryClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,8 +14,13 @@ class RSocketConfig(
     private val rSocketStrategies: RSocketStrategies
 ) {
 
-    @Bean("eventRSocketService")
-    fun eventRSocketService(): Mono<RSocketRequester> {
-        return RSocketClientFactory().createRSocketClient("event-service", discoveryClient, rSocketStrategies)
+
+    companion object {
+        const val AUTH_SERVICE_CLIENT_BEAN_ID = "authRSocketClient"
+    }
+
+    @Bean(AUTH_SERVICE_CLIENT_BEAN_ID)
+    fun authRSocketClient(): Mono<RSocketRequester> {
+        return RSocketClientFactory().createRSocketClient("auth-service", discoveryClient, rSocketStrategies)
     }
 }

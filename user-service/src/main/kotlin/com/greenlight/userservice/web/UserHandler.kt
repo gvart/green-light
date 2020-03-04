@@ -3,7 +3,7 @@ package com.greenlight.userservice.web
 import com.greenlight.common.web.handler.CRUDHandler
 import com.greenlight.userservice.domain.User
 import com.greenlight.userservice.service.UserService
-import com.greenlight.userservice.transfer.UserRequest
+import com.greenlight.userservice.transfer.user.UserRequest
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.awaitBody

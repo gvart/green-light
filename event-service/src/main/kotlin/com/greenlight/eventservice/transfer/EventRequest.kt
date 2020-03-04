@@ -1,6 +1,7 @@
 package com.greenlight.eventservice.transfer
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.greenlight.common.transfer.DomainConverter
 import com.greenlight.eventservice.domain.Event
 import com.greenlight.eventservice.domain.Point
 
