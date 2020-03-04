@@ -1,8 +1,8 @@
-#on:
-#  push:
-#    branches:
-#      - 'bugfix/**'
-#      - 'feature/**'
+on:
+  push:
+    branches:
+      - 'bugfix/**'
+      - 'feature/**'
 
 
 jobs:
