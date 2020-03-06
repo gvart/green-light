@@ -1,5 +1,11 @@
 version = "0.0.1-SNAPSHOT"
 
+configurations {
+    testCompile {
+        extendsFrom(compileOnly.get())
+    }
+}
+
 dependencies {
     //    todo remove starters and replace with dependencies itself
     compileOnly("org.springframework.boot:spring-boot-starter-oauth2-resource-server")

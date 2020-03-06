@@ -25,5 +25,6 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    testImplementation("com.h2database:h2")
 
 }
