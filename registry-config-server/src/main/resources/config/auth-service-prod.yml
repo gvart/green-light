@@ -3,8 +3,6 @@ server:
 
 spring:
   datasource:
-    username: postgres
-    password: password
     url: jdbc:postgresql://postgres:5432/auth_service
     type: com.zaxxer.hikari.HikariDataSource
     hikari:

@@ -7,8 +7,6 @@ spring:
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
   datasource:
-    username: postgres
-    password: password
     url: jdbc:postgresql://postgres:5432/event_service
     type: org.postgresql.ds.PGSimpleDataSource
   liquibase:

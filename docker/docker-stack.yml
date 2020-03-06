@@ -20,11 +20,104 @@ services:
     networks:
       - back-tier
     ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_MULTIPLE_DATABASES=event_service,user_service,auth_service,donation_service
+      - 5432:5432 #Remove before deploy to prod env
+    env_file:
+      - ./postgres/postgres.env
     volumes:
       - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
       - gl_postgres:/var/lib/postgresql
+
+  ## Microservices
+  registry-config-server:
+    image: "gvart/greenlight-registry-config-server:0.0.1-SNAPSHOT"
+    networks:
+      - back-tier
+    env_file:
+      - ./greenlight/greenlight.env
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 64M
+
+  gateway:
+    image: "gvart/greenlight-gateway:0.0.1-SNAPSHOT"
+    networks:
+      - back-tier
+      - front-tier
+    ports:
+      - 8080
+    depends_on:
+      - registry-config-server
+    env_file:
+      - ./greenlight/greenlight.env
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 64M
+
+  auth-service:
+    image: "gvart/greenlight-auth-service:0.0.1-SNAPSHOT"
+    networks:
+      - back-tier
+    depends_on:
+      - registry-config-server
+      - postgres
+    env_file:
+      - ./greenlight/greenlight.env
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 64M
+
+  user-service:
+    image: "gvart/greenlight-user-service:0.0.1-SNAPSHOT"
+    networks:
+      - back-tier
+    depends_on:
+      - postgres
+      - registry-config-server
+    env_file:
+      - ./greenlight/greenlight.env
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 64M
+
+  event-service:
+    image: "gvart/greenlight-event-service:0.0.1-SNAPSHOT"
+    networks:
+      - back-tier
+    depends_on:
+      - postgres
+      - registry-config-server
+    env_file:
+      - ./greenlight/greenlight.env
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 64M
