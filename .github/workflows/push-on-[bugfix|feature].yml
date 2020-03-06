@@ -36,7 +36,8 @@ jobs:
 
       - name: Analyze with SonarCloud
         run: ./gradlew sonarqube -Dsonar.login=${{secrets.SONAR_TOKEN}}
-
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Docker build & push
 #        run: ./gradlew jib -Djib.to.auth.username=$DOCKER_USERNAME -Djib.to.auth.password=$DOCKER_PASSWORD
 
