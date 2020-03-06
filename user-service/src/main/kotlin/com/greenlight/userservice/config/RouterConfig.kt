@@ -1,6 +1,6 @@
 package com.greenlight.userservice.config
 
-import com.greenlight.userservice.web.UserHandler
+import com.greenlight.userservice.UserHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.coRouter

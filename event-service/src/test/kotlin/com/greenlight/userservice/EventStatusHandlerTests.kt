@@ -1,4 +1,4 @@
-package com.greenlight.userservice.web
+package com.greenlight.userservice
 
 import com.greenlight.eventservice.domain.EventStatus
 import com.greenlight.eventservice.repository.EventStatusRepository

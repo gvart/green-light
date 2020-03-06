@@ -1,4 +1,4 @@
-package com.greenlight.userservice.web
+package com.greenlight.userservice
 
 import com.greenlight.common.web.handler.CRUDHandler
 import com.greenlight.userservice.domain.User

@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - 'bugfix/**'
+      - 'feature/**'
+
+
+jobs:
+  test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - run: echo running on branch ${GITHUB_REF}
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-caches-
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1.3.0
+        with:
+          java-version: 1.13
+
+      - name: Gradle Tests
+        run: ./gradlew test && ./gradlew jacocoMergeTest
+
+      - name: Analyze with SonarCloud
+        run: ./gradlew sonarqube -Dsonar.login=${{secrets.SONAR_TOKEN}}
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Docker build & push
+#        run: ./gradlew jib -Djib.to.auth.username=$DOCKER_USERNAME -Djib.to.auth.password=$DOCKER_PASSWORD
+

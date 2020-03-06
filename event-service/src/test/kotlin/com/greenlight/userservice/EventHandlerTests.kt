@@ -1,4 +1,4 @@
-package com.greenlight.userservice.web
+package com.greenlight.userservice
 
 import com.greenlight.eventservice.client.UserServiceClient
 import com.greenlight.eventservice.domain.Event
