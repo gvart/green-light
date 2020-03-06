@@ -35,9 +35,7 @@ jobs:
         run: ./gradlew test && ./gradlew jacocoMergeTest
 
       - name: Analyze with SonarCloud
-        run: ./gradlew sonarqube -Dsonar.login=$SONAR_LOGIN
-        env:
-          SONAR_LOGIN: ${{secrets.SONAR_TOKEN}}
+        run: ./gradlew sonarqube -Dsonar.login=${{secrets.SONAR_TOKEN}}
 
 #      - name: Docker build & push
 #        run: ./gradlew jib -Djib.to.auth.username=$DOCKER_USERNAME -Djib.to.auth.password=$DOCKER_PASSWORD
