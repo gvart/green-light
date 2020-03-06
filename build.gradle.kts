@@ -85,12 +85,10 @@ subprojects {
             }
             to {
                 image = "gvart/greenlight-${project.name}"
-                tags = setOf(project.version.toString(), "latest")
+                tags = mutableSetOf("latest")
             }
         }
     }
-
-
 }
 
 

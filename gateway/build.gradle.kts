@@ -1,9 +1,12 @@
-import com.google.cloud.tools.jib.gradle.ContainerParameters
+import com.google.cloud.tools.jib.gradle.JibExtension
 
 version = "0.0.1-SNAPSHOT"
-val containerProperties = ContainerParameters().apply {
-    jvmFlags = listOf()
+
+configure<JibExtension> {
+    container.jvmFlags = listOf()
+    to.tags.add(version.toString())
 }
+
 dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")

@@ -1,4 +1,11 @@
+import com.google.cloud.tools.jib.gradle.JibExtension
+
 version = "0.0.1-SNAPSHOT"
+
+configure<JibExtension> {
+    container.jvmFlags = listOf()
+    to.tags.add(version.toString())
+}
 
 dependencies {
     val implementation by configurations
