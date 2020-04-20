@@ -2,8 +2,8 @@ package com.greenlight.eventservice.config.r2dbc
 
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.greenlight.eventservice.config.r2dbc.converter.JsonPointConverter
-import com.greenlight.eventservice.config.r2dbc.converter.PointJsonConverter
+import com.greenlight.eventservice.config.r2dbc.converter.GeoLocationJsonConverter
+import com.greenlight.eventservice.config.r2dbc.converter.JsonGeoLocationConverter
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcProperties
@@ -19,7 +19,7 @@ class R2dbcConfiguration(private val properties: R2dbcProperties, private val ma
 
 
     override fun getCustomConverters(): MutableList<Any> {
-        return mutableListOf(JsonPointConverter(mapper), PointJsonConverter(mapper))
+        return mutableListOf(GeoLocationJsonConverter(mapper), JsonGeoLocationConverter(mapper))
     }
 
 }

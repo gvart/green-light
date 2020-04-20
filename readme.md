@@ -16,6 +16,11 @@ volunteers in public activity upon our environment.
 
 ## Installation
 In order to startup Green Light run the following commands:
+
+Application is working over HTTPS, before start please add following line in your hosts file:
+
+`127.0.0.1 greenlight.local`
+
 ```bash
 git clone git@github.com:gvart/green-light.git
 cd green-light
@@ -25,8 +30,8 @@ docket stack deploy green-light
 docket stack ps green-light
 ```
 ## Usage
-
-TBD
+* WebApp url: https://greenlight.local:8080/
+* Keycloack url: https://greenlight.local:8443/
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change 

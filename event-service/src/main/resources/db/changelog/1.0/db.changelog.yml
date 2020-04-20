@@ -24,9 +24,34 @@ databaseChangeLog:
               - column:
                   name: allow_actions
                   type: boolean
+                  defaultValue: true
                   constraints:
-                    defaultValue: true
                     nullable: false
+
+  - changeSet:
+      id: createTable-EventType
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_type
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: id
+                  type: smallint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_event_type
+              - column:
+                  name: title
+                  type: varchar(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(256)
 
   - changeSet:
       id: createTable-Event
@@ -50,14 +75,20 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: description
-                  type: varchar(1024)
+                  name: content
+                  type: varchar(4096)
               - column:
                   name: event_status
                   type: smallint
                   constraints:
                     foreignKeyName: fk_event_event_status
                     references: event_status(id)
+              - column:
+                  name: event_type
+                  type: smallint
+                  constraints:
+                    foreignKeyName: fk_event_event_type
+                    references: event_type(id)
               - column:
                   name: geo_location
                   type: jsonb
@@ -78,9 +109,202 @@ databaseChangeLog:
                   name: finished_at
                   type: datetime
               - column:
-                  name: author_id
-                  type: bigint
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
               - column:
                   name: people_required
                   type: smallint
+              - column:
+                  name: likes
+                  type: integer
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: items
+                  type: integer[]
+                  constraints:
+                    nullable: false
 
+  - changeSet:
+      id: createTable-EventParticipant
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_participant
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_event_participant_event_id
+                    references: event(id)
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: event_id, user_id
+            constraintName: unq_event_participant_event_id_user_id
+            deferrable: true
+            disabled: false
+            initiallyDeferred: true
+            tableName: event_participant
+            validate: true
+        - createIndex:
+            tableName: event_participant
+            columns:
+              - column:
+                  name: event_id
+            indexName: index_event_participant_event_id
+
+  - changeSet:
+      id: createTable-EventLike
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_like
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_event_like_event_id
+                    references: event(id)
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: event_id, user_id
+            constraintName: unq_event_like_event_like_user_id
+            deferrable: true
+            disabled: false
+            initiallyDeferred: true
+            tableName: event_like
+            validate: true
+        - createIndex:
+            tableName: event_like
+            columns:
+              - column:
+                  name: event_id
+            indexName: index_event_like_event_id
+
+  - changeSet:
+      id: createTable-EventComment
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_comment
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_event_comment
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_name
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_event_comment_event_id
+                    references: event(id)
+              - column:
+                  name: comment
+                  type: varchar(2048)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: createTable-EventCommentLikes
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_comment_like
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: comment_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_event_comment_event_id
+                    references: event_comment(id)
+              - column:
+                  name: user_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: comment_id, user_id
+            constraintName: unq_event_comment_like_user_id
+            deferrable: true
+            disabled: false
+            initiallyDeferred: true
+            tableName: event_comment_like
+            validate: true
+
+  - changeSet:
+      id: createTable-EventItem
+      author: gvart
+      changes:
+        - createTable:
+            tableName: event_item
+            remarks: initial table schema
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_event_item
+              - column:
+                  name: title
+                  type: varchar(128)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(256)
+              - column:
+                  name: image_url
+                  type: varchar(256)

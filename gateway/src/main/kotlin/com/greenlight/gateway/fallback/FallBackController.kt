@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono
 @RequestMapping
 class FallBackController {
 
-    data class FallBackMessage(private val message: String)
+    data class FallBackMessage(val message: String)
 
     @GetMapping("/fallback")
     suspend fun fallback(): FallBackMessage {

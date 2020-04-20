@@ -1,37 +1,42 @@
 package com.greenlight.eventservice.domain
 
-import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
-
+@Table
 data class Event(
     @Id
     val id: Long? = null,
 
     var title: String,
 
-    var description: String,
+    var content: String,
 
     @Column("event_status")
     var status: Long? = null,
 
-    var geoLocation: Point,
+    @Column("event_type")
+    var type: Int? = null,
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    var geoLocation: GeoLocation,
+
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     val startsAt: LocalDateTime,
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     var updatedAt: LocalDateTime? = null,
 
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     val finishedAt: LocalDateTime? = null,
 
-    var authorId: Long? = null,
+    var userId: String? = null,
 
-    var peopleRequired: Int
+    var userName: String? = null,
+
+    var peopleRequired: Int,
+
+    var likes: Int = 0,
+
+    var items: Set<Int>
 )

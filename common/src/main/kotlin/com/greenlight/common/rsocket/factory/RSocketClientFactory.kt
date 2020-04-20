@@ -13,6 +13,7 @@ import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.messaging.rsocket.RSocketStrategies
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import reactor.util.retry.Retry
 import java.time.Duration
 
 class RSocketClientFactory {
@@ -34,7 +35,7 @@ class RSocketClientFactory {
                         .frameDecoder(PayloadDecoder.ZERO_COPY)
                         .transport(TcpClientTransport.create(host.ipAddress, host.port))
                         .start()
-                        .retryBackoff(5, Duration.ofSeconds(1), Duration.ofSeconds(10))
+                        .retryWhen(Retry.backoff(5,Duration.ofSeconds(5)))
                         .doOnSubscribe { log.info("RSocket connection established: $it") }
                 }
             }

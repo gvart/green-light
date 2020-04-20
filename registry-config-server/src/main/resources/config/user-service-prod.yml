@@ -16,15 +16,3 @@ spring:
   rsocket:
     server:
       port: 7500
-
-security:
-  oauth2:
-    client:
-      client-id: user-service
-      client-secret: 123456
-
-greenlight:
-  security:
-    oauth2:
-      resource:
-        auto-configure: true

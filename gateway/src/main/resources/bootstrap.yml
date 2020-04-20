@@ -11,20 +11,12 @@ spring:
 
     gateway:
       routes:
-        - id: auth-service
-          uri: lb://auth-service
-          predicates:
-            - Path=/api/v1/auth
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: fallbackCommand
-                fallbackUri: forward:/fallback
         - id: event-service
           uri: lb://event-service
           predicates:
-            - Path=/api/v1/event
+            - Path=/api/v1/event/**
           filters:
+            - RewritePath=/api/v1/event/(?<segment>.*), /api/v1/$\{segment}
             - name: CircuitBreaker
               args:
                 name: fallbackCommand
@@ -32,8 +24,9 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/api/v1/user
+            - Path=/api/v1/user/**
           filters:
+            - RewritePath=/api/v1/user/(?<segment>.*), /$\{segment}
             - name: CircuitBreaker
               args:
                 name: fallbackCommand

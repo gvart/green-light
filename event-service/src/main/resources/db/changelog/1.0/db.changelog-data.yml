@@ -8,3 +8,21 @@ databaseChangeLog:
             encoding: UTF-8
             file: db/changelog/1.0/event_status-data.csv
             remarks: Load default event statuses
+  - changeSet:
+      id: default-event-types
+      author: gvart
+      changes:
+        - loadData:
+            tableName: event_type
+            encoding: UTF-8
+            file: db/changelog/1.0/event_type-data.csv
+            remarks: Load default event types
+  - changeSet:
+      id: default-event-items
+      author: gvart
+      changes:
+        - loadData:
+            tableName: event_item
+            encoding: UTF-8
+            file: db/changelog/1.0/event_item-data.csv
+            remarks: Load default event items

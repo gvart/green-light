@@ -1,6 +1,14 @@
 rootProject.name = "greenlight"
 
-include("common", "registry-config-server", "gateway", "event-service", "user-service", "auth-service")
+include(
+    "common",
+    "registry-config-server",
+    "gateway",
+    "event-service",
+    "user-service",
+    "feedback-service",
+    "notification-service"
+)
 
 val kotlinVersion: String by settings
 val springBootPluginVersion: String by settings

@@ -1,0 +1,20 @@
+server:
+  port: 8300
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/feedback_service
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  datasource:
+    username: postgres
+    password: password
+    url: jdbc:postgresql://localhost:5432/feedback_service
+    type: org.postgresql.ds.PGSimpleDataSource
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  rsocket:
+    server:
+      port: 7504

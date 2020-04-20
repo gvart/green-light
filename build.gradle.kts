@@ -35,6 +35,8 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 
+    apply(from = "../gradle/dependency-management.gradle.kts")
+
     configure<org.jetbrains.kotlin.noarg.gradle.NoArgExtension> {
         annotation("javax.persistence.Entity")
     }

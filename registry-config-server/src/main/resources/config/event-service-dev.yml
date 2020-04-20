@@ -19,14 +19,7 @@ spring:
     server:
       port: 7502
 
-security:
-  oauth2:
-    client:
-      client-id: event-service
-      client-secret: 123456
-
-greenlight:
-  security:
-    oauth2:
-      resource:
-        auto-configure: true
+  cache:
+    cache-names: event_likes
+    caffeine:
+      spec: maximumSize=500

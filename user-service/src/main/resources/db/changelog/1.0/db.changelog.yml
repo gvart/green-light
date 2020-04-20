@@ -1,42 +1,18 @@
 databaseChangeLog:
   - changeSet:
-      id: createTable-user
+      id: createTable-user_profile
       author: gvart
       changes:
         - createTable:
-            tableName: users
+            tableName: user_profile
             remarks: initial table schema
             columns:
               - column:
                   name: id
-                  type: int
-                  autoIncrement: true
+                  type: varchar(36)
                   constraints:
                     nullable: false
                     primaryKey: true
-                    primaryKeyName: pk_users
-              - column:
-                  name: nick_name
-                  type: varchar(32)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
-                  name: first_name
-                  type: varchar(64)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: last_name
-                  type: varchar(64)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: email
-                  type: varchar(128)
-                  constraints:
-                    nullable: false
-                    unique: true
               - column:
                   name: sex
                   type: varchar(12)
@@ -45,5 +21,11 @@ databaseChangeLog:
               - column:
                   name: birth_date
                   type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image
+                  type: varchar(256)
+                  defaValue: default
                   constraints:
                     nullable: false
