@@ -1,0 +1,6 @@
+<clr-modal [(clrModalOpen)]="isModalOpen">
+  <h3 class="modal-title">Event Location</h3>
+  <div class="modal-body">
+    <app-google-maps-location-picker [editable]="false" [locationMetadata]="locationMetadata"></app-google-maps-location-picker>
+  </div>
+</clr-modal>

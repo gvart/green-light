@@ -1,0 +1,26 @@
+<header class="header-1">
+  <div class="branding">
+    <a routerLink="/">
+      <clr-icon shape="blocks-group"></clr-icon>
+      <span class="title">Green Light</span>
+    </a>
+  </div>
+  <ng-container *ngIf="isAuthenticated">
+    <div class="header-nav">
+      <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+true}" class="nav-link nav-text">Home</a>
+      <a routerLink="/event" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+true}" class="nav-link nav-text">Events feed</a>
+      <a routerLink="/event/create" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+true}" class="nav-link nav-text">Create event</a>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/settings" routerLinkActive="active" class="nav-link nav-text">
+        Setting
+      </a>
+      <a (click)="logOut()" class="nav-link nav-text">
+        Log out
+      </a>
+    </div>
+  </ng-container>
+</header>

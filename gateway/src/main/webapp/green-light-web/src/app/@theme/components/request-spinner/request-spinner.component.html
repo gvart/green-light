@@ -1,0 +1,22 @@
+<div *ngIf="show()" class="preloader">
+  <div *ngIf="!error" class="lds-dual-ring"></div>
+
+  <div *ngIf="error" class="card text-center">
+    <div class="card-header">
+      Server response error
+    </div>
+    <div class="card-block pb-1">
+      <div class="card-text ">
+        <p class="text-red" *ngIf="defaultErrorMessage; else httpErrorMessage">{{defaultMessage}}</p>
+
+        <ng-template #httpErrorMessage>
+          <p class="text-red">{{error.message}}</p>
+        </ng-template>
+        <strong>or</strong>
+      </div>
+      <button class="btn btn-block btn-primary-outline" (click)="retry()">Retry </button>
+    </div>
+  </div>
+</div>
+
+

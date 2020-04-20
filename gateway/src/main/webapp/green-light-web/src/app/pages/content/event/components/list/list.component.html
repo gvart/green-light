@@ -1,0 +1,18 @@
+<app-request-spinner [waitFor]="events" [error]="error" (retry)="fetchEvents()"></app-request-spinner>
+
+<div *ngIf="events" class="clr-row">
+  <div class="clr-offset-lg-2 clr-col-lg-8 clr-col-12" >
+    <div class="card" *ngFor="let item of events">
+      <div class="card-header">
+        <app-feed-header [userId]="item.userId" [createdAt]="item.createdAt"
+                         [userName]="item.userName"></app-feed-header>
+      <app-like-button [isLiked]="item.isLiked" [eventId]="item.id" [likes]="item.likes"></app-like-button>
+      </div>
+      <div class="card-footer">
+        <h3 class="pointer" [routerLink]="'/event/' + item.id">{{item.title}}</h3>
+      </div>
+    </div>
+
+  </div>
+</div>
+

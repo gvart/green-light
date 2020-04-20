@@ -1,0 +1,68 @@
+<ng-container *ngIf="isReady;else spinner">
+  <div class="clr-row">
+    <div class="clr-offset-2 clr-col-8 text-center" *ngIf="isReady;else spinner">
+      <app-feed-header [createdAt]="event.createdAt" [userId]="event.userId"
+                       [userName]="event.nickName"></app-feed-header>
+      <button class="btn btn-primary btn-sm">become participant</button>
+      <button class="btn btn-success btn-sm">support</button>
+      <button class="btn btn-sm btn-sm">finalize</button>
+      <button class="btn btn-danger btn-sm">cancel</button>
+      <table class="table">
+        <tbody>
+        <tr>
+          <th colspan="2"><h2 class="m-0">{{event.title}}</h2></th>
+        </tr>
+        <tr>
+          <td>Starts at</td>
+          <td>{{event.startsAt}}</td>
+        </tr>
+        <tr>
+          <td>Required items</td>
+          <td>
+            <a *ngFor="let item of eventItems" role="tooltip" aria-haspopup="true"
+               class="tooltip tooltip-sm tooltip-top-left">
+              <span class="tooltip-content">{{item.title}}</span>
+              <img [src]="item.imageUrl" [alt]="item.title" class="event-item-image bShadow bShadow-3h"/>
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td class="geo-location pointer" (click)="locationPopupInfo.openModal()">{{event.geoLocation.street}}</td>
+        </tr>
+        <tr>
+          <td>People Required</td>
+          <td>{{event.peopleRequired}}</td>
+        </tr>
+        <tr>
+          <td>Participants</td>
+          <td>TBD</td>
+        </tr>
+        <tr>
+          <td colspan="2" [innerHTML]="trustedHtml"></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-left">
+            <app-like-button [isLiked]="event.isLiked" [eventId]="event.id" [likes]="event.likes"></app-like-button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="clr-row text-left">
+        <div class="clr-col">
+          <h3>Comments:</h3>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-google-maps-popup-info #locationPopupInfo [locationMetadata]="getEventLocation()"></app-google-maps-popup-info>
+</ng-container>
+
+<ng-template #spinner>
+    <span class="spinner">
+      Loading...
+    </span>
+</ng-template>
+

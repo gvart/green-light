@@ -1,0 +1,83 @@
+<div class="clr-row" *ngIf="eventTypes && eventItems">
+  <div class="clr-col">
+    <clr-wizard #wizard
+                [clrWizardOpen]="true"
+                [clrWizardClosable]="false"
+                (clrWizardOnCancel)="navigateBack()"
+                (clrWizardOnFinish)="submitForm()">
+      <clr-wizard-title>Create an event</clr-wizard-title>
+
+      <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+      <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+      <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+      <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+      <clr-wizard-page [clrWizardPageNextDisabled]="!isFormValid()">
+        <ng-template clrPageTitle>Details</ng-template>
+        <form clrForm [formGroup]="form" (ngSubmit)="submitForm()" class="clr-col">
+          <clr-input-container>
+            <label>Title</label>
+            <input clrInput type="text" formControlName="title"/>
+            <clr-control-helper>Event title</clr-control-helper>
+            <clr-control-error>Invalid</clr-control-error>
+          </clr-input-container>
+
+          <clr-select-container>
+            <label>Type</label>
+            <select clrSelect formControlName="type">
+              <option *ngFor="let item of eventTypes" [value]="item.id">{{item.title}}</option>
+            </select>
+            <clr-control-helper>Set Event type</clr-control-helper>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-select-container>
+
+          <clr-date-container>
+            <label>Starts at </label>
+            <input type="date" clrDate name="demo" formControlName="startsAt" [min]="getMinDate()">
+            <clr-control-helper>Start date</clr-control-helper>
+            <clr-control-error>Invalid</clr-control-error>
+          </clr-date-container>
+
+          <clr-input-container>
+            <label>People required</label>
+            <input clrInput type="number" formControlName="peopleRequired"/>
+            <clr-control-helper>Amount of people required to start this event</clr-control-helper>
+            <clr-control-error>Invalid</clr-control-error>
+          </clr-input-container>
+        </form>
+      </clr-wizard-page>
+
+      <clr-wizard-page [clrWizardPageNextDisabled]="!isLocationPicked()">
+        <ng-template clrPageTitle>Set Location</ng-template>
+        <app-google-maps-location-picker
+          #locationPicker
+          (locationSubmitted)="setLocation($event)"
+          [locationMetadata]="locationMetadata">
+        </app-google-maps-location-picker>
+      </clr-wizard-page>
+
+      <clr-wizard-page [clrWizardPageNextDisabled]="!isContentNonEmpty()">
+        <ng-template clrPageTitle>Set Description</ng-template>
+        <ckeditor [editor]="Editor" [(ngModel)]="eventRequest.content"></ckeditor>
+      </clr-wizard-page>
+
+      <clr-wizard-page>
+        <ng-template clrPageTitle>Set Requirements</ng-template>
+        <div class="clr-row">
+
+          <div *ngFor="let item of eventItems" class="clr-col-xl-3 clr-col-lg-4 clr-col-md-6 clr-col-sm-6">
+            <a  #card class="card clickable" (click)="onEventItemClicked(card, item.id)">
+              <div class="card-img pt-1">
+                <img  class="event-item-image" [src]="item.imageUrl" [alt]="item.title">
+              </div>
+              <div class="card-block text-center pt-0">
+                <h4>{{item.title}}</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </clr-wizard-page>
+    </clr-wizard>
+  </div>
+</div>
+

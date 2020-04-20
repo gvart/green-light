@@ -1,0 +1,8 @@
+<clr-vertical-nav>
+  <ng-container *ngFor="let item of menuItems">
+    <a clrVerticalNavLink [routerLink]="item.route">
+      <clr-icon clrVerticalNavIcon [attr.shape]="item.icon"></clr-icon>
+      {{item.text}}
+    </a>
+  </ng-container>
+</clr-vertical-nav>

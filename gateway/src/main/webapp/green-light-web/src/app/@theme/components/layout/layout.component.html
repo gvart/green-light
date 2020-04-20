@@ -1,0 +1,12 @@
+<div class="main-container">
+  <app-header
+    (singInClicked)="onSingIn()"
+    (singUpClicked)="onSingUp()"
+    (logOutClicked)="logOut()"
+  ></app-header>
+  <div class="content-container">
+    <div class="content-area p-0">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'node_modules/box-shadows-css/scss/box-shadows';
+@import 'node_modules/angular-notifier/styles';
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pt-1 {
+  padding-top: 1rem;
+}
+
+.pb-1 {
+  padding-bottom: 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+div.clr-input-group {
+  width: 100%;
+}
+
+div.clr-select-wrapper {
+  width: 100%;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.p-2 {
+  padding: 2rem;
+}
+
+.text-red {
+  color: red;
+}
+
+.mr-0 {
+  margin-right: 0 !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+$primary: #00364d;
+
+.text-primary {
+  color: $primary;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.p-0 {
+  padding: 0 !important;
+}

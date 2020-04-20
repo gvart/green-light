@@ -1,0 +1,32 @@
+input {
+  width: 100% !important;
+}
+
+div.clr-input-group {
+  width: 100%;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 500px;
+  max-height: 500px;
+}
+
+button.btn-primary {
+  min-width: 100%;
+}
+
+select {
+  width: 100%;
+}
+
+.event-item-image {
+  height: 5rem;
+}
+
+.event-selected {
+  background: #179bd3;
+}
+
+.event-selected > .card-block > h4 {
+  color: white;
+}

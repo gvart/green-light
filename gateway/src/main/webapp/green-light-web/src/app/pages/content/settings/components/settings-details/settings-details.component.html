@@ -1,0 +1,17 @@
+<div *ngIf="user" class="clr-row">
+  <div class="clr-offset-lg-2 clr-col-lg-8 clr-offset-md-1 clr-col-md-10 clr-col-12">
+    <div class="card">
+      <div class="card-header">
+        {{user.name}}
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          ...
+        </div>
+        <div class="card-text">
+          {{user | json}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

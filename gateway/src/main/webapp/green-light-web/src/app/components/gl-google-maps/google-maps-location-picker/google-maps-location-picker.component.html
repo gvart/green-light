@@ -1,0 +1,15 @@
+<div>
+  <google-map
+    #map
+    [center]="center"
+    height="500px"
+    width="100%"
+    [zoom]="13"
+    [options]="options"
+    (mapClick)="editable ? setLocation($event) : null">
+    <map-marker [position]="locationMetadata.location"></map-marker>
+  </google-map>
+
+  <input [disabled]="!editable" type="text" placeholder="Full street name" class="clr-input mt-1"
+         [(ngModel)]="locationMetadata.street">
+</div>
