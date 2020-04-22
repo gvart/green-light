@@ -1,23 +1,26 @@
 package com.greenlight.eventservice.testconfig
 
 import com.greenlight.common.security.service.SecurityService
-import com.greenlight.eventservice.config.SecurityConfig
 import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
 import org.springframework.context.annotation.Primary
+import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder
 import reactor.core.publisher.Mono
 
 @TestConfiguration
-@Import(SecurityConfig::class)
-class SecurityTestConfig {
+class MockedSecurityBeansConfiguration {
 
     @Bean
     @Primary
-    fun mockSecurityService(): SecurityService {
+    fun fakedSecurityService(): SecurityService {
         return object : SecurityService {
-            override fun extractUserId() = Mono.just("1")
+            override fun extractUserId() = Mono.just("userId")
             override fun extractUsername() = Mono.just("username")
+
         }
     }
+
+    @MockBean
+    lateinit var decoder: ReactiveJwtDecoder
 }

@@ -37,5 +37,4 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
 
-    testImplementation("io.r2dbc:r2dbc-h2:0.8.0.RELEASE")
 }

@@ -108,7 +108,11 @@ sonarqube {
  */
 tasks {
     register<JacocoReport>("jacocoMergeTest") {
-        val classTree = subprojects.map { it.buildDir.resolve("classes/kotlin/main") }
+        val classTree = subprojects.map {
+            fileTree("${it.buildDir}/classes/kotlin/main").apply {
+                exclude("**/*Config.class", "**/*Config$*.class")
+            }
+        }
         val sourceTree = subprojects.map { it.projectDir.resolve("src/main/kotlin") }
         val executionTree = subprojects.map { it.buildDir.resolve("jacoco/test.exec") }
 
@@ -121,6 +125,7 @@ tasks {
                 isEnabled = true
                 destination = File("${project.buildDir}/jacoco/report.xml")
             }
+            html.setEnabled(true)
         }
     }
 
