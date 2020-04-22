@@ -98,7 +98,7 @@ sonarqube {
     properties {
         property("sonar.projectKey", "gvart_green-light")
         property("sonar.organization", "gvart")
-        property("sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/report.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/jacoco/report.xml")
         property("sonar.host.url", "https://sonarcloud.io")
 
     }
